@@ -38,7 +38,6 @@
 *.sdf
 *.opensdf
 *.unsuccessfulbuild
-*.sln
 *.csproj
 *.cachefile
 ipch/
