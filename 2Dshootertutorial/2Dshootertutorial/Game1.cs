@@ -18,6 +18,7 @@ namespace _2Dshootertutorial {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player p = new Player(); //make player
+        Starfield sf = new Starfield();
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -25,8 +26,8 @@ namespace _2Dshootertutorial {
 
             //Set some basic stuff for my game
             graphics.IsFullScreen = false; //set it to full screen no
-            graphics.PreferredBackBufferWidth = 600; //set the screen dimension width
-            graphics.PreferredBackBufferHeight = 700; //set the screen dimension height
+            graphics.PreferredBackBufferWidth = Defualt.Default._W; //set the screen dimension width
+            graphics.PreferredBackBufferHeight = Defualt.Default._H; //set the screen dimension height
             this.Window.Title = "MySpaceShooter"; //set window title
         }
 
@@ -44,6 +45,7 @@ namespace _2Dshootertutorial {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             p.LoadContent(Content); //load the player
+            sf.LoadContent(Content); //load the starfield
 
         }
 
@@ -61,7 +63,8 @@ namespace _2Dshootertutorial {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            p.Update(gameTime);
+            p.Update(gameTime); //update player
+            sf.Update(gameTime); //update starfield
             base.Update(gameTime);
         }
 
@@ -69,11 +72,11 @@ namespace _2Dshootertutorial {
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //Do all the player drawing
+            //Do all the drawings
             spriteBatch.Begin();
-            p.Draw(spriteBatch);
+            sf.Draw(spriteBatch); //draw starfield first
+            p.Draw(spriteBatch); //draw player
             spriteBatch.End();
-
 
             base.Draw(gameTime);
         }
