@@ -39,6 +39,8 @@
 *.opensdf
 *.unsuccessfulbuild
 *.sln
+*.csproj
+*.cachefile
 ipch/
 obj/
 Design/[Bb]in
