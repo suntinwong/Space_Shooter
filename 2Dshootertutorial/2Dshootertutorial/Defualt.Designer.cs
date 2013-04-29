@@ -82,5 +82,17 @@ namespace _2Dshootertutorial {
                 this["StarfieldDefualtSpeed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int AsteroidDefualtSpeed {
+            get {
+                return ((int)(this["AsteroidDefualtSpeed"]));
+            }
+            set {
+                this["AsteroidDefualtSpeed"] = value;
+            }
+        }
     }
 }

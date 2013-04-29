@@ -19,6 +19,7 @@ namespace _2Dshootertutorial {
         SpriteBatch spriteBatch;
         Player p = new Player(); //make player
         Starfield sf = new Starfield();
+        Asteroid asteroid = new Asteroid();
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -46,6 +47,8 @@ namespace _2Dshootertutorial {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             p.LoadContent(Content); //load the player
             sf.LoadContent(Content); //load the starfield
+            asteroid.LoadContent(Content); //draw asteroid
+            
 
         }
 
@@ -65,6 +68,7 @@ namespace _2Dshootertutorial {
 
             p.Update(gameTime); //update player
             sf.Update(gameTime); //update starfield
+            asteroid.Update(gameTime); //draws asteroid
             base.Update(gameTime);
         }
 
@@ -76,6 +80,7 @@ namespace _2Dshootertutorial {
             spriteBatch.Begin();
             sf.Draw(spriteBatch); //draw starfield first
             p.Draw(spriteBatch); //draw player
+            asteroid.Draw(spriteBatch); //draw asteroids
             spriteBatch.End();
 
             base.Draw(gameTime);
