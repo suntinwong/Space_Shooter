@@ -15,7 +15,6 @@ namespace _2Dshootertutorial {
         public int speed;
         public bool isVisible;
         public Rectangle boundingBox;
-
         Random random = new Random();
         public float randX, randY;
 
@@ -32,9 +31,8 @@ namespace _2Dshootertutorial {
 
         //Load content method
         public void LoadContent(ContentManager content){
-            texture = content.Load<Texture2D>("asteroid");
-            origin.X = texture.Width / 2;
-            origin.Y = texture.Height / 2;
+
+           
         }
 
         //Draw mehtod
@@ -46,7 +44,11 @@ namespace _2Dshootertutorial {
 
         //Update Method
         public void Update(GameTime gametime) {
-            
+
+            //update origin(for rotation) every frame
+            origin.X = texture.Width / 2;
+            origin.Y = texture.Height / 2;
+
             //set bounding box for collision
             boundingBox = new Rectangle((int)position.X, (int)position.Y,(int)texture.Width,(int)texture.Height);
 

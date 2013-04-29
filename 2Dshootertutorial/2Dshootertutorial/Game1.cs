@@ -69,6 +69,7 @@ namespace _2Dshootertutorial {
             sf.Update(gameTime); //update starfield
             p.Update(gameTime); //update player
             UpdateAsteroids(gameTime); //update asteroids
+            UpdateCollisions();
             base.Update(gameTime);
         }
 
@@ -104,7 +105,23 @@ namespace _2Dshootertutorial {
          
         }
 
-       
-    
+        //Checks collisions
+        private void UpdateCollisions() {
+
+            //Check to see if player or bullets collides with asteroids
+            for (int i = 0; i < asteroids.Count(); i++) {
+
+                if (p.boundingBox.Intersects(asteroids[i].boundingBox)) 
+                    asteroids[i].isVisible = false;
+
+                for (int j = 0; j < p.bullets.Count(); j++) {
+                    if (p.bullets[j].boundingBox.Intersects(asteroids[i].boundingBox)) {
+                        p.bullets[j].isVisible = false;
+                        asteroids[i].isVisible = false;
+                    }
+                }
+            }
+        }
+
     }
 }

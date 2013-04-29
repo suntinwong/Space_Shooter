@@ -51,6 +51,9 @@ namespace _2Dshootertutorial {
         //update function
         public void Update(GameTime gameTime) {
 
+            //update boundingBox
+            boundingBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+
             bool moveLeft, moveRight, moveUp, moveDown,firebullets;
 
             //get the keyboard state input
@@ -110,6 +113,7 @@ namespace _2Dshootertutorial {
 
              for(int i = 0; i < bullets.Count(); i++) {
                 bullets[i].position.Y -= bullets[i].speed; //move bullet
+                bullets[i].boundingBox = new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, bulletTexture.Width, bulletTexture.Height);
                 if (bullets[i].position.Y <= 0) {
                     bullets[i].isVisible = false;
                     bullets.RemoveAt(i); //remove bullet if it is not visible
