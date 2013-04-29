@@ -38,6 +38,7 @@
 *.sdf
 *.opensdf
 *.unsuccessfulbuild
+*.sln
 ipch/
 obj/
 Design/[Bb]in
