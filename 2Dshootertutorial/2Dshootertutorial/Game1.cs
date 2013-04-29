@@ -17,9 +17,11 @@ namespace _2Dshootertutorial {
     public class Game1 : Microsoft.Xna.Framework.Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Player p = new Player(); //make player
-        Starfield sf = new Starfield();
-        Asteroid asteroid = new Asteroid();
+        Random random = new Random(); //seed random number
+        Player p = new Player(); //make player object
+        Starfield sf = new Starfield(); //make starfield background object
+        List<Asteroid> asteroids = new List<Asteroid>(); //make asteroid list
+
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -47,8 +49,6 @@ namespace _2Dshootertutorial {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             p.LoadContent(Content); //load the player
             sf.LoadContent(Content); //load the starfield
-            asteroid.LoadContent(Content); //draw asteroid
-            
 
         }
 
@@ -65,10 +65,10 @@ namespace _2Dshootertutorial {
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
-            p.Update(gameTime); //update player
+            
             sf.Update(gameTime); //update starfield
-            asteroid.Update(gameTime); //draws asteroid
+            p.Update(gameTime); //update player
+            UpdateAsteroids(gameTime); //update asteroids
             base.Update(gameTime);
         }
 
@@ -79,11 +79,32 @@ namespace _2Dshootertutorial {
             //Do all the drawings
             spriteBatch.Begin();
             sf.Draw(spriteBatch); //draw starfield first
+            foreach (Asteroid a in asteroids) a.Draw(spriteBatch); //draw asteroids
             p.Draw(spriteBatch); //draw player
-            asteroid.Draw(spriteBatch); //draw asteroids
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+        //load astroids helper function
+        private void UpdateAsteroids(GameTime gameTime) {
+            int randX = random.Next(0, Defualt.Default._W);
+            int randY = random.Next(-1 * Defualt.Default._H, -50);
+
+            //Add more asteroids if needed
+            if (asteroids.Count() < Defualt.Default.AsteroidMax)
+                asteroids.Add(new Asteroid(Content.Load<Texture2D>("asteroid"), new Vector2(randX, randY)));
+
+            //Remove or update all asteroids
+            for (int i = 0; i < asteroids.Count(); i++) {
+                asteroids[i].Update(gameTime); //update all asteroids
+                if (!asteroids[i].isVisible) asteroids.RemoveAt(i); //Remove astroids if not visible
+            }
+
+         
+        }
+
+       
+    
     }
 }

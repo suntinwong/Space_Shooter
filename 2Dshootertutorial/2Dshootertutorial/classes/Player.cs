@@ -87,6 +87,7 @@ namespace _2Dshootertutorial {
            
             //update bullet
             update_bullets();
+
         }
 
         //Shoot method, used to set starting position of our bullets

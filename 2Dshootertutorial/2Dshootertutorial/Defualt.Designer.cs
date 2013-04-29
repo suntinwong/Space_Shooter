@@ -118,5 +118,17 @@ namespace _2Dshootertutorial {
                 this["PlayerShootSpeed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int AsteroidMax {
+            get {
+                return ((int)(this["AsteroidMax"]));
+            }
+            set {
+                this["AsteroidMax"] = value;
+            }
+        }
     }
 }

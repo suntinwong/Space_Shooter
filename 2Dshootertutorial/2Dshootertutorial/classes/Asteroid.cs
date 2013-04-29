@@ -13,17 +13,21 @@ namespace _2Dshootertutorial {
         public Vector2 position, origin;
         public float rotationAngle;
         public int speed;
-        public bool isColliding, isdestroyed;
+        public bool isVisible;
         public Rectangle boundingBox;
 
+        Random random = new Random();
+        public float randX, randY;
+
         //constructor
-        public Asteroid() {
-            texture = null;
-            position = new Vector2(300, -100);
+        public Asteroid(Texture2D newtexture, Vector2 newposition) {
+            texture = newtexture;
+            position = newposition;
             rotationAngle = 0;
             speed = Defualt.Default.AsteroidDefualtSpeed;
-            isColliding = false;
-            isdestroyed = false;
+            isVisible = true;
+            randX = random.Next(0, Defualt.Default._W);
+            randY = random.Next(Defualt.Default._H * -1, -50);
         }
 
         //Load content method
@@ -35,7 +39,7 @@ namespace _2Dshootertutorial {
 
         //Draw mehtod
         public void Draw(SpriteBatch spritebatch) {
-            if (!isdestroyed) {
+            if (isVisible) {
                 spritebatch.Draw(texture, position, null, Color.White, rotationAngle, origin,1.0f, SpriteEffects.None, 0f);
             }
         }
@@ -48,7 +52,9 @@ namespace _2Dshootertutorial {
 
             //update movement
             position.Y += speed;
-            if (position.Y >= Defualt.Default._H) position.Y = -100;
+            if (position.Y >= Defualt.Default._H) {
+                isVisible = false;
+            }
 
             //rotate asteroid
             float elapsed = (float)gametime.ElapsedGameTime.TotalSeconds;
@@ -56,8 +62,5 @@ namespace _2Dshootertutorial {
             float circle = MathHelper.Pi * 2;
             rotationAngle = rotationAngle % circle;
         }
-
-
-
     }
 }
