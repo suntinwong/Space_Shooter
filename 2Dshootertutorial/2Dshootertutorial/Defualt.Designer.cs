@@ -94,5 +94,17 @@ namespace _2Dshootertutorial {
                 this["AsteroidDefualtSpeed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int BulletDefualtSpeed {
+            get {
+                return ((int)(this["BulletDefualtSpeed"]));
+            }
+            set {
+                this["BulletDefualtSpeed"] = value;
+            }
+        }
     }
 }

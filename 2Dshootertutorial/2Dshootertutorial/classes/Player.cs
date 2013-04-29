@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace _2Dshootertutorial {
+
+    //Main
     public class Player {
         public Texture2D texture;
         public Vector2 position;
