@@ -11,22 +11,23 @@ namespace _2Dshootertutorial {
     public class Explosion {
         public Texture2D texture;
         public Vector2 position,origin;
-        public float timer, interval;
+        public float timer, interval,scale;
         public int currentFrame, spriteWidth, spriteHeight,numframes;
         public Rectangle sourceRect;
         public bool isVisible;
 
         //Constructor
-        public Explosion(Texture2D newtexture,Vector2 newposition) {
+        public Explosion(Texture2D newtexture,Vector2 newposition,float newinterval, float newscale) {
             texture = newtexture;
             position = newposition;
             timer = 0f;
-            interval = 20f;
+            interval = newinterval;
             currentFrame = 1;
             spriteWidth = 128; //width of each frame
             spriteHeight = 128; //height of each frame
             numframes = 17;
             isVisible = true;
+            scale = newscale;
 
         }
 
@@ -57,7 +58,7 @@ namespace _2Dshootertutorial {
         //Draw method
         public void Draw(SpriteBatch spritebatch) {
             if (isVisible)
-                spritebatch.Draw(texture, position, sourceRect, Color.White, 0f, origin,1.0f,SpriteEffects.None,0);
+                spritebatch.Draw(texture, position, sourceRect, Color.White, 0f, origin,scale,SpriteEffects.None,0);
 
         }
 

@@ -23,7 +23,7 @@ namespace _2Dshootertutorial {
         Starfield sf = new Starfield(); //make starfield background object
         List<Asteroid> asteroids = new List<Asteroid>(); //make asteroid list
         List<Explosion> explosions = new List<Explosion>(); //make explosion list
-
+        HUD hud = new HUD(); //make hud
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -31,7 +31,7 @@ namespace _2Dshootertutorial {
 
             //Set some basic stuff for my game
             graphics.IsFullScreen = false; //set it to full screen no
-            graphics.PreferredBackBufferWidth = Defualt.Default._W; //set the screen dimension width
+            graphics.PreferredBackBufferWidth = Defualt.Default._W + 200; //set the screen dimension width
             graphics.PreferredBackBufferHeight = Defualt.Default._H; //set the screen dimension height
             this.Window.Title = "MySpaceShooter"; //set window title
         }
@@ -51,6 +51,7 @@ namespace _2Dshootertutorial {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             p.LoadContent(Content); //load the player
             sf.LoadContent(Content); //load the starfield
+            hud.LoadContent(Content); //Load hud
 
         }
 
@@ -72,13 +73,14 @@ namespace _2Dshootertutorial {
             p.Update(gameTime); //update player
             UpdateAsteroids(gameTime); //update asteroids
             UpdateExplosions(gameTime); //update explosions
-            UpdateCollisions();
+            AsteroidCollisions(); //do collision logic with asteroids
+            hud.Update(p.score, p.health); //update the hud
             base.Update(gameTime);
         }
 
        //draw
         protected override void Draw(GameTime gameTime) {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             //Do all the drawings
             spriteBatch.Begin();
@@ -86,6 +88,7 @@ namespace _2Dshootertutorial {
             foreach (Asteroid a in asteroids) a.Draw(spriteBatch); //draw asteroids
             p.Draw(spriteBatch); //draw player
             foreach (Explosion e in explosions) e.Draw(spriteBatch); //draw explosions
+            hud.Draw(spriteBatch); //draw hud
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -118,25 +121,34 @@ namespace _2Dshootertutorial {
         }
 
 
-        //Checks collisions
-        private void UpdateCollisions() {
+        //Checks collisions with asteroids, and act appropaitly
+        private void AsteroidCollisions() {
 
-            //Check to see if player or bullets collides with asteroids
+            //Check collisions with asteroids and other objects
             for (int i = 0; i < asteroids.Count(); i++) {
 
-                if (p.boundingBox.Intersects(asteroids[i].boundingBox)) {
-                    explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), asteroids[i].position));
+                if (p.boundingBox.Intersects(asteroids[i].boundingBox)) { //collision of asteroid & player
+                    explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), asteroids[i].position,20f,1f));
                     asteroids[i].isVisible = false;
+                    p.health -= 35;
+                    if (p.health < 1) GameOverState();
                 }
 
-                for (int j = 0; j < p.bullets.Count(); j++) {
-                    if (p.bullets[j].boundingBox.Intersects(asteroids[i].boundingBox)) {
-                        explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), asteroids[i].position));
+                for (int j = 0; j < p.bullets.Count(); j++) { 
+                    if (p.bullets[j].boundingBox.Intersects(asteroids[i].boundingBox)) { //collision of asteroid & bullet
+                        explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), asteroids[i].position,20f,1f));
                         p.bullets[j].isVisible = false;
                         asteroids[i].isVisible = false;
+                        p.score++;
                     }
                 }
             }
+        }
+
+        //Player has died, game over state
+        private void GameOverState() {
+            Exit();
+
         }
 
     }

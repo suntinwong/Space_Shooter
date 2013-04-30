@@ -15,7 +15,7 @@ namespace _2Dshootertutorial {
     public class Starfield {
 
         public Texture2D texture;
-        public Vector2 bgPosition1,bgPosition2; //bg#1 and bg#2 positions
+        public Vector2 bgPosition1,bgPosition2; //bg#1,bg#2 positions
         public int speed;
 
 

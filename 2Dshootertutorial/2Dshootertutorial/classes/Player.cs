@@ -24,6 +24,9 @@ namespace _2Dshootertutorial {
         public float bulletDelay;
         public List<Bullet> bullets;
 
+        //other
+        public int health,score;
+
         //Defualt Constructor
         public Player(){
 
@@ -34,6 +37,7 @@ namespace _2Dshootertutorial {
             isColliding = false;
             bullets = new List<Bullet>();
             bulletDelay = Defualt.Default.PlayerShootSpeed;
+            health = 100; score = 0;
         }
 
         //load content
