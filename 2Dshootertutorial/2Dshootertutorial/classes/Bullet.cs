@@ -26,7 +26,7 @@ namespace _2Dshootertutorial {
 
         //draw method
         public void Draw(SpriteBatch spritebatch){
-            spritebatch.Draw(texture, position, Color.White);
+            if(isVisible) spritebatch.Draw(texture, position, Color.White);
         }
 
     }

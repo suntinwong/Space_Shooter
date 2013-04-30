@@ -17,10 +17,12 @@ namespace _2Dshootertutorial {
     public class Game1 : Microsoft.Xna.Framework.Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         Random random = new Random(); //seed random number
         Player p = new Player(); //make player object
         Starfield sf = new Starfield(); //make starfield background object
         List<Asteroid> asteroids = new List<Asteroid>(); //make asteroid list
+        List<Explosion> explosions = new List<Explosion>(); //make explosion list
 
 
         public Game1() {
@@ -69,6 +71,7 @@ namespace _2Dshootertutorial {
             sf.Update(gameTime); //update starfield
             p.Update(gameTime); //update player
             UpdateAsteroids(gameTime); //update asteroids
+            UpdateExplosions(gameTime); //update explosions
             UpdateCollisions();
             base.Update(gameTime);
         }
@@ -82,12 +85,13 @@ namespace _2Dshootertutorial {
             sf.Draw(spriteBatch); //draw starfield first
             foreach (Asteroid a in asteroids) a.Draw(spriteBatch); //draw asteroids
             p.Draw(spriteBatch); //draw player
+            foreach (Explosion e in explosions) e.Draw(spriteBatch); //draw explosions
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
-        //load astroids helper function
+        //update astroids helper function
         private void UpdateAsteroids(GameTime gameTime) {
             int randX = random.Next(0, Defualt.Default._W);
             int randY = random.Next(-1 * Defualt.Default._H, -50);
@@ -105,17 +109,29 @@ namespace _2Dshootertutorial {
          
         }
 
+        //update explisions helper function
+        private void UpdateExplosions(GameTime gametime) {
+            for (int i = 0; i < explosions.Count(); i++) {
+                if (!explosions[i].isVisible) explosions.RemoveAt(i);
+                else explosions[i].Update(gametime);
+            }
+        }
+
+
         //Checks collisions
         private void UpdateCollisions() {
 
             //Check to see if player or bullets collides with asteroids
             for (int i = 0; i < asteroids.Count(); i++) {
 
-                if (p.boundingBox.Intersects(asteroids[i].boundingBox)) 
+                if (p.boundingBox.Intersects(asteroids[i].boundingBox)) {
+                    explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), asteroids[i].position));
                     asteroids[i].isVisible = false;
+                }
 
                 for (int j = 0; j < p.bullets.Count(); j++) {
                     if (p.bullets[j].boundingBox.Intersects(asteroids[i].boundingBox)) {
+                        explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), asteroids[i].position));
                         p.bullets[j].isVisible = false;
                         asteroids[i].isVisible = false;
                     }

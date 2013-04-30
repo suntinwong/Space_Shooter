@@ -121,7 +121,7 @@ namespace _2Dshootertutorial {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int AsteroidMax {
             get {
                 return ((int)(this["AsteroidMax"]));
