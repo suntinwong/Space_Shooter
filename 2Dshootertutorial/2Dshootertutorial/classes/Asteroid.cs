@@ -32,6 +32,7 @@ namespace _2Dshootertutorial {
         //Load content method
         public void LoadContent(ContentManager content){
 
+            
            
         }
 
@@ -50,11 +51,11 @@ namespace _2Dshootertutorial {
             origin.Y = texture.Height / 2;
 
             //set bounding box for collision
-            boundingBox = new Rectangle((int)position.X, (int)position.Y,(int)texture.Width,(int)texture.Height);
+            boundingBox = new Rectangle((int)(position.X - (texture.Width / 2)), (int)(position.Y - (texture.Height / 2)), texture.Width, texture.Height);
 
             //update movement
             position.Y += speed;
-            if (position.Y >= Defualt.Default._H) {
+            if (position.Y >= Defualt.Default._H + 100) {
                 isVisible = false;
             }
 
