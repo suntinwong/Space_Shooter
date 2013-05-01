@@ -30,6 +30,7 @@ namespace _2Dshootertutorial {
         //load content
         public void LoadContent(ContentManager content) {
             texture = content.Load<Texture2D>("space");
+            bgPosition2 = new Vector2(0, -1 * texture.Height);
         }
 
         //draw method
@@ -48,7 +49,7 @@ namespace _2Dshootertutorial {
             //scrolling illusion, reset coordinates when needed
             if (bgPosition1.Y >= Defualt.Default._H) {
                 bgPosition1.Y = 0;
-                bgPosition2.Y = -1 * Defualt.Default._H;
+                bgPosition2.Y = -1 * texture.Height;
             }
         }
 

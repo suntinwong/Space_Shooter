@@ -17,7 +17,7 @@ namespace _2Dshootertutorial {
         public Vector2 position;
         public int speed; //ship's movement speed
         public Rectangle boundingBox;
-        public bool isColliding, isVisible;
+        public bool isVisible;
 
         //Bullet stuff
         public Texture2D bulletTexture;
@@ -35,7 +35,7 @@ namespace _2Dshootertutorial {
             texture = null;
             position = new Vector2(300, 600);
             speed = Defualt.Default.PlayerDefualtSpeed;
-            isColliding = false; isVisible = true;
+            isVisible = true;
             bullets = new List<Bullet>();
             bulletDelay = Defualt.Default.PlayerShootSpeed;
             health = 100; score = 0;

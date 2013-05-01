@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="classes\Asteroid.cs" />
     <Compile Include="classes\Bullet.cs" />
+    <Compile Include="classes\Enemy.cs" />
     <Compile Include="classes\HUD.cs" />
     <Compile Include="classes\Player.cs" />
     <Compile Include="classes\Explosion.cs" />
