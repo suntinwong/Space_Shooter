@@ -133,6 +133,7 @@ namespace _2Dshootertutorial {
         public void kill_player() {
             boundingBox = new Rectangle(-1000, 0, 0, 0);
             isVisible = false;
+            bullets.RemoveRange(0, bullets.Count());
         }
 
     }

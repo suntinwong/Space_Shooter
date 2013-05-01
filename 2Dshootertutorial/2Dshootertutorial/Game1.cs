@@ -151,7 +151,7 @@ namespace _2Dshootertutorial {
                         sm.explodeSound.Play();
                     }
                 }
-            }
+            }    
         }
 
         //Player has died, game over state
