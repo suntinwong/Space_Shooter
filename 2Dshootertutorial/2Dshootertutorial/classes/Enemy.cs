@@ -29,19 +29,20 @@ namespace _2Dshootertutorial {
         public float randX, randY;
 
         //Constructor
-        public Enemy(int type,ContentManager Content) {
+        public Enemy(ContentManager Content,int type,float posx, float posy) {
 
             //set basic ship parameters
             shiptype = type;
             isVisible = true;
             bullets = new List<Bullet>();
             bulletDelay = 0;
+            position = new Vector2(posx, posy);
 
             //Defualt type 0, medium fighter type
             if (type == 0) {
-                texture = Content.Load<Texture2D>("enemyship0");
-                bulletTexture = Content.Load<Texture2D>("enemybullet0");
-                position = new Vector2(random.Next(0, Defualt.Default._W) - texture.Width, random.Next(-1 * Defualt.Default._H, -100));
+                texture = Content.Load<Texture2D>("Artwork/enemyship0");
+                bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet0");
+                //position = new Vector2(random.Next(0, Defualt.Default._W) - texture.Width, random.Next(-1 * Defualt.Default._H, -100));
                 health = 50; speed = 2; bulletvelocity = 5; firerate = 80; bulletdamage = 30;
             }
         }

@@ -42,73 +42,73 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ship.png">
+    <Compile Include="Artwork\ship.png">
       <Name>ship</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="space.png">
+    <Compile Include="Artwork\space.png">
       <Name>space</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="asteroid.png">
+    <Compile Include="Artwork\asteroid.png">
       <Name>asteroid</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="playerbullet.png">
+    <Compile Include="Artwork\playerbullet.png">
       <Name>playerbullet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="explosion3.png">
+    <Compile Include="Artwork\explosion3.png">
       <Name>explosion3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyFont1.spritefont">
+    <Compile Include="SpriteFonts\MyFont1.spritefont">
       <Name>MyFont1</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="explode.wav">
+    <Compile Include="Sounds\explode.wav">
       <Name>explode</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="playershoot.wav">
+    <Compile Include="Sounds\playershoot.wav">
       <Name>playershoot</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="bgm1.mp3">
+    <Compile Include="Sounds\bgm1.mp3">
       <Name>bgm1</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="enemyship0.png">
+    <Compile Include="Artwork\enemyship0.png">
       <Name>enemyship0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="enemybullet0.png">
+    <Compile Include="Artwork\enemybullet0.png">
       <Name>enemybullet0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

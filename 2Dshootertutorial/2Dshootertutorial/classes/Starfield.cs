@@ -29,7 +29,7 @@ namespace _2Dshootertutorial {
 
         //load content
         public void LoadContent(ContentManager content) {
-            texture = content.Load<Texture2D>("space");
+            texture = content.Load<Texture2D>("Artwork/space");
             bgPosition2 = new Vector2(0, -1 * texture.Height);
         }
 

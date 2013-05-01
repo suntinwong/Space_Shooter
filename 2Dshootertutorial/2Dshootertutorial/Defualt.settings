@@ -12,7 +12,7 @@
       <Value Profile="(Default)">600</Value>
     </Setting>
     <Setting Name="AsteroidMax" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="EnemyMax" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>

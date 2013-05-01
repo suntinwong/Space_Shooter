@@ -26,7 +26,7 @@ namespace _2Dshootertutorial {
             damage = 25;    //set the collision damage when it hits the player
 
             //Other stuff
-            texture = Content.Load<Texture2D>("asteroid");
+            texture = Content.Load<Texture2D>("Artwork/asteroid");
             if (posx == -999f && posy == -999f)
                 position = new Vector2(random.Next(0, Defualt.Default._W - texture.Width), random.Next(Defualt.Default._H * -2, -50));
             else position = new Vector2(posx, posy);

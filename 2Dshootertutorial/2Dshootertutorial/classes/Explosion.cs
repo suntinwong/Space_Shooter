@@ -25,14 +25,13 @@ namespace _2Dshootertutorial {
             interval = newinterval; //speed at which we go through the sprites
             
             //Other stuff
-            texture = Content.Load<Texture2D>("explosion3");
+            texture = Content.Load<Texture2D>("Artwork/explosion3");
             timer = 0f;
             isVisible = true;
             currentFrame = 1; //frame number where we start on
             numframes = 17; //total number of frames for the sprite
             spriteWidth = 128; //width of each frame
             spriteHeight = 128; //height of each frame
-          
         }
 
         //Update method

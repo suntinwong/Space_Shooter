@@ -24,9 +24,9 @@ namespace _2Dshootertutorial {
 
         //Load method
         public void LoadContent(ContentManager content) {
-            playerShootSound = content.Load<SoundEffect>("playershoot");
-            explodeSound = content.Load<SoundEffect>("explode");
-            bgm1 = content.Load<Song>("bgm1");
+            playerShootSound = content.Load<SoundEffect>("Sounds/playershoot");
+            explodeSound = content.Load<SoundEffect>("Sounds/explode");
+            bgm1 = content.Load<Song>("Sounds/bgm1");
         }
 
     }

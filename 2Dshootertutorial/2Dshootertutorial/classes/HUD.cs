@@ -26,7 +26,7 @@ namespace _2Dshootertutorial{
         
         //load method
         public void LoadContent(ContentManager content) {
-            spritefont = content.Load<SpriteFont>("MyFont1");
+            spritefont = content.Load<SpriteFont>("SpriteFonts/MyFont1");
         }
 
 

@@ -125,7 +125,7 @@ namespace _2Dshootertutorial {
 
             //Add more asteroids if needed
             if (asteroids.Count() < Defualt.Default.AsteroidMax)
-                asteroids.Add(new Asteroid(Content));
+                asteroids.Add(new Asteroid(Content, random.Next(0, Defualt.Default._W - 25), random.Next(Defualt.Default._H * -2, -50)));
 
             //Remove or update all asteroids
             for (int i = 0; i < asteroids.Count(); i++) {
@@ -210,7 +210,7 @@ namespace _2Dshootertutorial {
 
             //Add more enemies if needed
             if (enemies.Count() < Defualt.Default.EnemyMax) {
-                enemies.Add(new Enemy(0,Content));
+                enemies.Add(new Enemy(Content, 0, random.Next(0, Defualt.Default._W-30), random.Next(-2 * Defualt.Default._H, -250)));
             }
 
             //Remove or update all enemies
