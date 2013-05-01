@@ -34,7 +34,16 @@ namespace _2Dshootertutorial{
         public void Draw(SpriteBatch spritebatch) {
             spritebatch.DrawString(spritefont, scoreText, scorePos, textColor, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
             spritebatch.DrawString(spritefont, healthText, healthPos, textColor, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
-s
+        }
+
+        public void Draw_gameOver(SpriteBatch spritebatch,int newscore) {
+            string text = "Game Over";
+            Vector2 pos = new Vector2( ((Defualt.Default._W+200)/2)-50, Defualt.Default._H / 2);
+            spritebatch.DrawString(spritefont, text, pos, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
+
+            string text2 = "Your Final Score: " + newscore;
+            Vector2 pos2 = new Vector2( ((Defualt.Default._W+200)/2)-100, (Defualt.Default._H / 2) +30);
+            spritebatch.DrawString(spritefont, text2, pos2, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
         }
 
 

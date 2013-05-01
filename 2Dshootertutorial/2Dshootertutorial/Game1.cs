@@ -108,7 +108,7 @@ namespace _2Dshootertutorial {
             } 
             
             else if (gamestate == 2) { //Endgame state
-
+                hud.Draw_gameOver(spriteBatch, p.score);
 
             }
 
