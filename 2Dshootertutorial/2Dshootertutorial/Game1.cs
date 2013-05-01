@@ -27,7 +27,8 @@ namespace _2Dshootertutorial {
         SoundManager sm = new SoundManager(); //sound manager 
        
 
-        int state = 1;
+        int gamestate = 1;
+        bool gameoverflag = false;
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -73,14 +74,20 @@ namespace _2Dshootertutorial {
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            
+
+            if (gamestate == 1) {
                 sf.Update(gameTime); //update starfield
                 if(p.isVisible) p.Update(gameTime); //update player
                 UpdateAsteroids(gameTime); //update asteroids
-                UpdateExplosions(gameTime); //update explosions
                 AsteroidCollisions(); //do collision logic with asteroids
                 hud.Update(p.score, p.health); //update the hud
                 base.Update(gameTime);
+                UpdateExplosions(gameTime); //update explosions
+            }
+
+            if (gameoverflag) 
+                if (gameTime.TotalGameTime.Seconds % 8 == 0)
+                    gamestate = 2;
             
         }
 
@@ -89,14 +96,24 @@ namespace _2Dshootertutorial {
             GraphicsDevice.Clear(Color.Black);
 
             //Do all the drawings
+            
             spriteBatch.Begin();
-            sf.Draw(spriteBatch); //draw starfield first
-            foreach (Asteroid a in asteroids) a.Draw(spriteBatch); //draw asteroids
-            p.Draw(spriteBatch); //draw player
-            foreach (Explosion e in explosions) e.Draw(spriteBatch); //draw explosions
-            hud.Draw(spriteBatch); //draw hud
-            spriteBatch.End();
 
+            if (gamestate == 1) { //playing game state
+                sf.Draw(spriteBatch); //draw starfield first
+                foreach (Asteroid a in asteroids) a.Draw(spriteBatch); //draw asteroids
+                p.Draw(spriteBatch); //draw player
+                foreach (Explosion e in explosions) e.Draw(spriteBatch); //draw explosions
+                hud.Draw(spriteBatch); //draw hud
+            } 
+            
+            else if (gamestate == 2) { //Endgame state
+
+
+            }
+
+
+            spriteBatch.End();
             base.Draw(gameTime);
         }
 
@@ -160,8 +177,7 @@ namespace _2Dshootertutorial {
             explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), p.position, 40f, 3f));
             MediaPlayer.Stop();
             p.kill_player();
-            
-            //Exit();
+            gameoverflag = true;
 
         }
 

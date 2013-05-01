@@ -19,8 +19,8 @@ namespace _2Dshootertutorial{
         public HUD() {
             scoreText = "Score: ";
             healthText = "Health: ";
-            scorePos = new Vector2(Defualt.Default._W + 30, 100);
-            healthPos = new Vector2(Defualt.Default._W + 30, 150);
+            scorePos = new Vector2(Defualt.Default._W + 10, 100);
+            healthPos = new Vector2(Defualt.Default._W + 10, 150);
             textColor = Color.White;
         }
         
@@ -34,8 +34,7 @@ namespace _2Dshootertutorial{
         public void Draw(SpriteBatch spritebatch) {
             spritebatch.DrawString(spritefont, scoreText, scorePos, textColor, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
             spritebatch.DrawString(spritefont, healthText, healthPos, textColor, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
-            //spriteBatch.DrawString(Content.Load<SpriteFont>("MyFont1"), "Hello World", new Vector2(700, 100), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
-
+s
         }
 
 
