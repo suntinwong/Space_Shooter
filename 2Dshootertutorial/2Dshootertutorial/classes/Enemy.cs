@@ -29,23 +29,22 @@ namespace _2Dshootertutorial {
         public float randX, randY;
 
         //Constructor
-        public Enemy(int type) {
+        public Enemy(int type,ContentManager Content) {
 
             //set basic ship parameters
             shiptype = type;
-            texture = null;
             isVisible = true;
             bullets = new List<Bullet>();
             bulletDelay = 0;
 
             //defualt, medium fighter type
             if (type == 0) {
+
                 //Modify things unique to this object
+                texture = Content.Load<Texture2D>("enemyship0");
+                bulletTexture = Content.Load<Texture2D>("enemybullet0");
                 position = new Vector2(random.Next(0, Defualt.Default._W), random.Next(-1 * Defualt.Default._H, -100)); 
-                speed = 3;
-                bulletspeed = 10;
-                shootspeed = 50;
-                health = 50;
+                speed = 2; bulletspeed = 5;  shootspeed = 80; health = 50;
             }
 
 
@@ -53,17 +52,23 @@ namespace _2Dshootertutorial {
 
         //Load method
         public void LoadContent(ContentManager Content) {
-            if (shiptype == 0) Content.Load<Texture2D>("enemyship0");
+            if (shiptype == 0) {
+                
+            }
 
         }
 
         //Draw method
         public void Draw(SpriteBatch spritebatch) {
-            if (isVisible) spritebatch.Draw(texture, position, Color.White);
+            if (isVisible) {
+                spritebatch.Draw(texture, position, Color.White);
+                for (int i = 0; i < bullets.Count(); i++)
+                    bullets[i].Draw(spritebatch);
+            }
         }
 
         //update method
-        public void update() {
+        public void Update(GameTime gametime) {
 
             //set bounding box for collision
             boundingBox = new Rectangle((int)(position.X - (texture.Width / 2)), (int)(position.Y - (texture.Height / 2)), texture.Width, texture.Height);
@@ -105,7 +110,7 @@ namespace _2Dshootertutorial {
 
             //move all bullets that are owned by the ship
             for (int i = 0; i < bullets.Count(); i++) {
-                bullets[i].position.Y -= bulletspeed; //move bullet
+                bullets[i].position.Y += bulletspeed; //move bullet
                 bullets[i].boundingBox = new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, bulletTexture.Width, bulletTexture.Height);
                 if (bullets[i].position.Y <= 0 || !bullets[i].isVisible) {
                     bullets[i].isVisible = false;

@@ -19,10 +19,13 @@ namespace _2Dshootertutorial {
         SpriteBatch spriteBatch;
 
         Random random = new Random(); //seed random number
+
+        //Create objects
         Player p = new Player(); //make player object
         Starfield sf = new Starfield(); //make starfield background object
         List<Asteroid> asteroids = new List<Asteroid>(); //make asteroid list
         List<Explosion> explosions = new List<Explosion>(); //make explosion list
+        List<Enemy> enemies = new List<Enemy>(); // make the enemy list
         HUD hud = new HUD(); //make hud
         SoundManager sm = new SoundManager(); //sound manager 
        
@@ -44,8 +47,6 @@ namespace _2Dshootertutorial {
         
         //init funciton
         protected override void Initialize() {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -76,13 +77,14 @@ namespace _2Dshootertutorial {
                 this.Exit();
 
             if (gamestate == 1) {
-                sf.Update(gameTime); //update starfield
-                if(p.isVisible) p.Update(gameTime); //update player
-                UpdateAsteroids(gameTime); //update asteroids
-                AsteroidCollisions(); //do collision logic with asteroids
-                hud.Update(p.score, p.health); //update the hud
+                sf.Update(gameTime);                            //update starfield
+                if(p.isVisible) p.Update(gameTime);             //update player
+                UpdateAsteroids(gameTime); AsteroidCollisions();//update asteroids & collisions
+                UpdateExplosions(gameTime);                     //update explosions
+                UpdateEnemies(gameTime);                        //update enemies
+                hud.Update(p.score, p.health);                  //update the hud
                 base.Update(gameTime);
-                UpdateExplosions(gameTime); //update explosions
+                
             }
 
             if (gameoverflag) 
@@ -102,6 +104,7 @@ namespace _2Dshootertutorial {
             if (gamestate == 1) { //playing game state
                 sf.Draw(spriteBatch); //draw starfield first
                 foreach (Asteroid a in asteroids) a.Draw(spriteBatch); //draw asteroids
+                foreach (Enemy e in enemies) e.Draw(spriteBatch); //draw enemies
                 p.Draw(spriteBatch); //draw player
                 foreach (Explosion e in explosions) e.Draw(spriteBatch); //draw explosions
                 hud.Draw(spriteBatch); //draw hud
@@ -128,21 +131,11 @@ namespace _2Dshootertutorial {
 
             //Remove or update all asteroids
             for (int i = 0; i < asteroids.Count(); i++) {
-                asteroids[i].Update(gameTime); //update all asteroids
                 if (!asteroids[i].isVisible) asteroids.RemoveAt(i); //Remove astroids if not visible
-            }
-
-         
-        }
-
-        //update explisions helper function
-        private void UpdateExplosions(GameTime gametime) {
-            for (int i = 0; i < explosions.Count(); i++) {
-                if (!explosions[i].isVisible) explosions.RemoveAt(i);
-                else explosions[i].Update(gametime);
+                else asteroids[i].Update(gameTime); //update all asteroids
+                
             }
         }
-
 
         //Checks collisions with asteroids, and act appropaitly
         private void AsteroidCollisions() {
@@ -169,6 +162,31 @@ namespace _2Dshootertutorial {
                     }
                 }
             }    
+        }
+
+        //update enemies helper funciton
+        private void UpdateEnemies(GameTime gameTime) {
+
+            //Add more enemies if needed
+            if (enemies.Count() < Defualt.Default.EnemyMax) {
+                enemies.Add(new Enemy(0,Content));
+            }
+
+            //Remove or update all enemies
+            for (int i = 0; i < enemies.Count(); i++) {
+                if (!enemies[i].isVisible) enemies.RemoveAt(i); //Remove astroids if not visible
+                else enemies[i].Update(gameTime); //update all asteroids
+            }
+
+        }
+
+
+        //update explisions helper function
+        private void UpdateExplosions(GameTime gametime) {
+            for (int i = 0; i < explosions.Count(); i++) {
+                if (!explosions[i].isVisible) explosions.RemoveAt(i);
+                else explosions[i].Update(gametime);
+            }
         }
 
         //Player has died, game over state
