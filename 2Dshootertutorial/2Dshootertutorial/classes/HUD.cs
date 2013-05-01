@@ -11,29 +11,34 @@ namespace _2Dshootertutorial{
     public class HUD {
 
         SpriteFont spritefont;
+        Texture2D hp_empty, hp_greenbar;
         string scoreText, healthText;
         Vector2 scorePos, healthPos;
         Color textColor;
+        int healthpercent;
 
 
         public HUD() {
             scoreText = "Score: ";
             healthText = "Health: ";
-            scorePos = new Vector2(Defualt.Default._W + 10, 100);
-            healthPos = new Vector2(Defualt.Default._W + 10, 150);
+            scorePos = new Vector2(Defualt.Default._W + 5, 100);
+            healthPos = new Vector2(Defualt.Default._W + 5, 150);
             textColor = Color.White;
+            healthpercent = 100;
         }
         
         //load method
         public void LoadContent(ContentManager content) {
             spritefont = content.Load<SpriteFont>("SpriteFonts/MyFont1");
+            hp_empty = content.Load<Texture2D>("Artwork/hp_empty"); 
+            hp_greenbar = content.Load<Texture2D>("Artwork/hp_greenbar");
         }
-
 
         //Draw Method
         public void Draw(SpriteBatch spritebatch) {
             spritebatch.DrawString(spritefont, scoreText, scorePos, textColor, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
-            spritebatch.DrawString(spritefont, healthText, healthPos, textColor, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
+            spritebatch.Draw(hp_empty, healthPos, Color.White);
+            spritebatch.Draw(hp_greenbar, new Vector2(healthPos.X+40,healthPos.Y+10), new Rectangle(0,0, healthpercent,hp_greenbar.Height), Color.White);
         }
 
         //Game over method
@@ -56,6 +61,7 @@ namespace _2Dshootertutorial{
             if (newhealth < 0) newhealth = 0;
             scoreText = "Score: " + newscore;
             healthText = "Health: " + newhealth + "%";
+            healthpercent = newhealth;
         }
 
 
