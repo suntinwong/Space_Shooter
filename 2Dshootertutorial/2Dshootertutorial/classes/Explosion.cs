@@ -18,22 +18,21 @@ namespace _2Dshootertutorial {
 
         //Constructor
         public Explosion(ContentManager Content,Vector2 newposition,float newinterval, float newscale) {
+
+            //Important properties of the object
+            position = newposition; //world space of the sprite
+            scale = newscale;       //scale of the sprite
+            interval = newinterval; //speed at which we go through the sprites
+            
+            //Other stuff
             texture = Content.Load<Texture2D>("explosion3");
-            position = newposition;
             timer = 0f;
-            interval = newinterval;
-            currentFrame = 1;
+            isVisible = true;
+            currentFrame = 1; //frame number where we start on
+            numframes = 17; //total number of frames for the sprite
             spriteWidth = 128; //width of each frame
             spriteHeight = 128; //height of each frame
-            numframes = 17;
-            isVisible = true;
-            scale = newscale;
-
-        }
-
-        //LoadContent
-        public void LoadContent(ContentManager content) {
-           
+          
         }
 
         //Update method
@@ -57,11 +56,8 @@ namespace _2Dshootertutorial {
 
         //Draw method
         public void Draw(SpriteBatch spritebatch) {
-            if (isVisible)
+            if (isVisible) //Only draw when visible
                 spritebatch.Draw(texture, position, sourceRect, Color.White, 0f, origin,scale,SpriteEffects.None,0);
-
         }
-
-
     }
 }
