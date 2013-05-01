@@ -49,7 +49,7 @@ namespace _2Dshootertutorial {
 
         //load content
         public void LoadContent(ContentManager Content){
-            texture = Content.Load<Texture2D>("Artwork/ship");
+            texture = Content.Load<Texture2D>("Artwork/player");
             bulletTexture = Content.Load<Texture2D>("Artwork/playerbullet");
             sm.LoadContent(Content);
         }
