@@ -15,18 +15,21 @@ namespace _2Dshootertutorial {
         public Texture2D texture;
         public Vector2 position, origin;
         public bool isVisible;
-        public float speed;
+        public float speedY,speedX,rotation;
 
         //Constructor
         public Bullet(Texture2D newtexture, float newspeed = 10) {
             texture = newtexture;
             isVisible = true;
-            speed = newspeed;
+            speedY = newspeed;
+            speedX = 0;
+            rotation = 0;
         }
 
         //draw method
         public void Draw(SpriteBatch spritebatch){
-            if(isVisible) spritebatch.Draw(texture, position, Color.White);
+            if(isVisible && position.X > 0 && position.X < Defualt.Default._W) 
+                spritebatch.Draw(texture, position, null, Color.White, rotation, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
         }
 
     }

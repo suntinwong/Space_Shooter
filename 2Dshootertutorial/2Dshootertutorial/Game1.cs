@@ -164,7 +164,7 @@ namespace _2Dshootertutorial {
                             explosions.Add(new Explosion(Content, new Vector2( enemies[j].position.X +  enemies[j].texture.Width/2, enemies[j].position.Y +  enemies[j].texture.Height/2) , 20f, 1f));
                             sm.explodeSound.Play();
                             enemies[j].isVisible = false;
-                            p.score += 5;
+                            p.score += enemies[j].score;
                         } 
                         else explosions.Add(new Explosion(Content, p.bullets[i].position, 20f, .33f));
                     }
@@ -210,7 +210,8 @@ namespace _2Dshootertutorial {
 
             //Add more enemies if needed
             if (enemies.Count() < Defualt.Default.EnemyMax) {
-                enemies.Add(new Enemy(Content, 0, random.Next(0, Defualt.Default._W-30), random.Next(-2 * Defualt.Default._H, -250)));
+               
+                enemies.Add(new Enemy(Content,RandomShipType(), random.Next(0, Defualt.Default._W-30), random.Next(-2 * Defualt.Default._H, -250)));
             }
 
             //Remove or update all enemies
@@ -239,5 +240,12 @@ namespace _2Dshootertutorial {
 
         }
 
+        //get a random shiptype number
+        private int RandomShipType() {
+            int shiptype = 0;
+            int rand = random.Next(0, 100);
+            if (rand > 80) shiptype = 1;
+            return shiptype;
+        }
     }
 }

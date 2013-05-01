@@ -35,6 +35,7 @@ namespace _2Dshootertutorial {
             health = 100;           //player's hitpoints
             speed = 5;              //Move speed
             laserDamage = 25;       //per laser hit damage
+            bulletspeed = 12.5f;      //speed of the laser
             firerate = 20;          //fire rate of lasers
 
             //set other stuff
@@ -110,7 +111,7 @@ namespace _2Dshootertutorial {
 
             //shoot only if the bullet delay is set. particle originates in center of player
             if (bulletDelay >= firerate) {
-                Bullet b = new Bullet(bulletTexture);
+                Bullet b = new Bullet(bulletTexture,bulletspeed);
                 b.position = new Vector2(position.X + texture.Width / 2 - b.texture.Width / 2, position.Y + texture.Height / 2 - b.texture.Height / 2);
                 b.isVisible = true;
                 if (bullets.Count() < 20) bullets.Add(b);
@@ -123,7 +124,7 @@ namespace _2Dshootertutorial {
         public void update_bullets() {
 
              for(int i = 0; i < bullets.Count(); i++) {
-                bullets[i].position.Y -= bullets[i].speed; //move bullet
+                bullets[i].position.Y -= bullets[i].speedY; //move bullet
                 bullets[i].boundingBox = new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, bulletTexture.Width, bulletTexture.Height);
                 if (bullets[i].position.Y <= 0 || !bullets[i].isVisible) {
                     bullets[i].isVisible = false;

@@ -87,8 +87,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Artwork\enemyship0.png">
-      <Name>enemyship0</Name>
+    <Compile Include="Artwork\enemyship1.png">
+      <Name>enemyship1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -118,6 +118,13 @@
     </Compile>
     <Compile Include="Artwork\hp_greenbar.png">
       <Name>hp_greenbar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Artwork\enemyship0.png">
+      <Name>enemyship0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
