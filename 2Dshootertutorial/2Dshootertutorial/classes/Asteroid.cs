@@ -55,9 +55,9 @@ namespace _2Dshootertutorial {
 
             //update movement
             position.Y += speed;
-            if (position.Y >= Defualt.Default._H + 100) {
+            if (position.Y >= Defualt.Default._H + 100) 
                 isVisible = false;
-            }
+            
 
             //rotate asteroid
             float elapsed = (float)gametime.ElapsedGameTime.TotalSeconds;

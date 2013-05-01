@@ -21,7 +21,7 @@ namespace _2Dshootertutorial {
 
         //Bullet stuff
         public Texture2D bulletTexture;
-        public float bulletDelay;
+        public float bulletDelay,bulletspeed;
         public List<Bullet> bullets;
 
         //other

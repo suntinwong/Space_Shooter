@@ -18,10 +18,10 @@ namespace _2Dshootertutorial {
         public float speed;
 
         //Constructor
-        public Bullet(Texture2D newtexture) {
+        public Bullet(Texture2D newtexture, float newspeed = 10) {
             texture = newtexture;
             isVisible = true;
-            speed = Defualt.Default.BulletDefualtSpeed;
+            speed = newspeed;
         }
 
         //draw method
