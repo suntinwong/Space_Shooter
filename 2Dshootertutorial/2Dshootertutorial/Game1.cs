@@ -29,7 +29,7 @@ namespace _2Dshootertutorial {
         HUD hud = new HUD(); //make hud
         SoundManager sm = new SoundManager(); //sound manager 
        
-
+        //Game varibles
         int gamestate = 1;
         bool gameoverflag = false;
 
@@ -76,6 +76,7 @@ namespace _2Dshootertutorial {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            //When in playing game state
             if (gamestate == 1) {
                 sf.Update(gameTime);                            //update starfield
                 if(p.isVisible) p.Update(gameTime);             //update player
@@ -84,37 +85,32 @@ namespace _2Dshootertutorial {
                 UpdateEnemies(gameTime);                        //update enemies
                 UpdateCollisions(gameTime);                     //update all collisions
                 hud.Update(p.score, p.health);                  //update the hud
-                
-                base.Update(gameTime);
-                
             }
 
-            if (gameoverflag) 
-                if (gameTime.TotalGameTime.Seconds % 8 == 0)
-                    gamestate = 2;
-            
+            //Game wait between game state and gameover state
+            if (gameoverflag) if (gameTime.TotalGameTime.Seconds % 8 == 0) gamestate = 2;
+
+            base.Update(gameTime);
         }
 
-       //draw
+       //Draw Method : do all the drawings to the screen
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.Black);
-
-            //Do all the drawings
-            
             spriteBatch.Begin();
 
-            if (gamestate == 1) { //playing game state
-                sf.Draw(spriteBatch); //draw starfield first
-                foreach (Asteroid a in asteroids) a.Draw(spriteBatch); //draw asteroids
-                foreach (Enemy e in enemies) e.Draw(spriteBatch); //draw enemies
-                p.Draw(spriteBatch); //draw player
+            //When in playing game state
+            if (gamestate == 1) { 
+                sf.Draw(spriteBatch);                                   //ALWAYS draw starfield first
+                foreach (Asteroid a in asteroids) a.Draw(spriteBatch);  //draw asteroids
+                foreach (Enemy e in enemies) e.Draw(spriteBatch);       //draw enemies
+                p.Draw(spriteBatch);                                    //draw player
                 foreach (Explosion e in explosions) e.Draw(spriteBatch); //draw explosions
-                hud.Draw(spriteBatch); //draw hud
-            } 
-            
-            else if (gamestate == 2) { //Endgame state
-                hud.Draw_gameOver(spriteBatch, p.score);
+                hud.Draw(spriteBatch);                                  //draw hud
+            }
 
+           //Endgame state
+            else if (gamestate == 2) { 
+                hud.Draw_gameOver(spriteBatch, p.score);        //draw gameover screen
             }
 
 
@@ -122,7 +118,7 @@ namespace _2Dshootertutorial {
             base.Draw(gameTime);
         }
 
-        //update astroids helper function
+        //Update astroids helper function
         private void UpdateAsteroids(GameTime gameTime) {
             int randX = random.Next(0, Defualt.Default._W);
             int randY = random.Next(-1 * Defualt.Default._H, -50);
@@ -135,11 +131,10 @@ namespace _2Dshootertutorial {
             for (int i = 0; i < asteroids.Count(); i++) {
                 if (!asteroids[i].isVisible) asteroids.RemoveAt(i); //Remove astroids if not visible
                 else asteroids[i].Update(gameTime); //update all asteroids
-                
             }
         }
 
-        //Handle all collisions
+        //Update collisions helper function  - Handle all collisions
         private void UpdateCollisions(GameTime gameTime){
             
             //Do all player lazer collisions
@@ -234,7 +229,7 @@ namespace _2Dshootertutorial {
             }
         }
 
-        //Player has died, game over state
+        //Player has died, pre-gameover state
         private void GameOverState() {
 
             explosions.Add(new Explosion(Content, p.position, 40f, 3f));

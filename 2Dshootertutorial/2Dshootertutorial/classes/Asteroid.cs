@@ -15,29 +15,24 @@ namespace _2Dshootertutorial {
         public int health,speed,damage;
         public bool isVisible;
         public Rectangle boundingBox;
-        Random random = new Random();
+        Random random = new Random(); //seed random number for placement
 
-        //constructor
-        public Asteroid(ContentManager Content) {
+        //Constructor
+        public Asteroid(ContentManager Content, float posx = -999f, float posy = -999f) {
 
             //Asteroid basic properties
-            health = 25;
-            speed = 4;
-            damage = 25;
+            health = 25;   //set the hitpoitns for the astroid
+            speed = 4;     //set the velocity at which it travels toward the player
+            damage = 25;    //set the collision damage when it hits the player
 
             //Other stuff
             texture = Content.Load<Texture2D>("asteroid");
-            position = new Vector2(random.Next(0, Defualt.Default._W - texture.Width), random.Next(Defualt.Default._H * -2, -50));
+            if (posx == -999f && posy == -999f)
+                position = new Vector2(random.Next(0, Defualt.Default._W - texture.Width), random.Next(Defualt.Default._H * -2, -50));
+            else position = new Vector2(posx, posy);
             rotationAngle = 0;
             isVisible = true;
 
-        }
-
-        //Load content method
-        public void LoadContent(ContentManager content){
-
-            
-           
         }
 
         //Draw mehtod
@@ -62,7 +57,6 @@ namespace _2Dshootertutorial {
             if (position.Y >= Defualt.Default._H + 100) 
                 isVisible = false;
             
-
             //rotate asteroid
             float elapsed = (float)gametime.ElapsedGameTime.TotalSeconds;
             rotationAngle += elapsed;
