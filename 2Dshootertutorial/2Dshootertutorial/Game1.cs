@@ -216,7 +216,7 @@ namespace _2Dshootertutorial {
 
             //Remove or update all enemies
             for (int i = 0; i < enemies.Count(); i++) {
-                if (!enemies[i].isVisible) enemies.RemoveAt(i); //Remove astroids if not visible
+                if (enemies[i].position.Y >= Defualt.Default._H + 400 ) enemies.RemoveAt(i); //Remove astroids if not visible
                 else enemies[i].Update(gameTime); //update all asteroids
             }
 

@@ -49,7 +49,7 @@ namespace _2Dshootertutorial {
             else if (type == 1) {
                 texture = Content.Load<Texture2D>("Artwork/enemyship1");
                 bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet0");
-                health = 75; speed = 1.25f; bulletvelocity = 5f; firerate = 120; bulletdamage = 30; score = 10;
+                health = 100; speed = 1.25f; bulletvelocity = 5f; firerate = 120; bulletdamage = 30; score = 10;
             }
         }
 
@@ -58,29 +58,26 @@ namespace _2Dshootertutorial {
         public void Draw(SpriteBatch spritebatch) {
 
             //Only draw if the ship is visible
-            if (isVisible) {
+            if (isVisible) spritebatch.Draw(texture, position, Color.White);
 
-                //Draw the actual ship
-                spritebatch.Draw(texture, position, Color.White);
-
-                //Draw all bullets associated with the ship
-                for (int i = 0; i < bullets.Count(); i++) 
-                    bullets[i].Draw(spritebatch);
-            }
+            //Draw all bullets associated with the ship
+            for (int i = 0; i < bullets.Count(); i++)  bullets[i].Draw(spritebatch);
+            
         }
 
         //update method
         public void Update(GameTime gametime) {
 
             //set bounding box for collision
-            boundingBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            if (isVisible) boundingBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            else boundingBox = new Rectangle(-900, 0, 1, 1);
             
             //update movement
             position.Y += speed;
-            if (position.Y >= Defualt.Default._H + 100) isVisible = false;
+            if (position.Y >= Defualt.Default._H + 400) isVisible = false;
 
             //only shoot bullets if they are on the screen
-            if (position.Y > 0) shoot_bullets();
+            if (position.Y > 0 && isVisible) shoot_bullets();
 
             //update all bullets
             update_bullets();

@@ -35,8 +35,8 @@ namespace _2Dshootertutorial {
             health = 100;           //player's hitpoints
             speed = 5;              //Move speed
             laserDamage = 25;       //per laser hit damage
-            bulletspeed = 12.5f;      //speed of the laser
-            firerate = 20;          //fire rate of lasers
+            bulletspeed = 15f;      //speed of the laser
+            firerate = 7.5f;          //fire rate of lasers
 
             //set other stuff
             texture = null;
