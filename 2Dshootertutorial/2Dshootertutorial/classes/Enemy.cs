@@ -20,7 +20,7 @@ namespace _2Dshootertutorial {
 
         //Bullet stuff
         public Texture2D bulletTexture;
-        public float bulletDelay,shootspeed,bulletspeed;
+        public float bulletDelay, firerate, bulletvelocity, bulletdamage;
         public List<Bullet> bullets;
 
         //Other stuff
@@ -39,25 +39,16 @@ namespace _2Dshootertutorial {
 
             //defualt, medium fighter type
             if (type == 0) {
-
-                //Modify things unique to this object
                 texture = Content.Load<Texture2D>("enemyship0");
                 bulletTexture = Content.Load<Texture2D>("enemybullet0");
-                position = new Vector2(random.Next(0, Defualt.Default._W), random.Next(-1 * Defualt.Default._H, -100)); 
-                speed = 2; bulletspeed = 5;  shootspeed = 80; health = 50;
+                position = new Vector2(random.Next(0, Defualt.Default._W), random.Next(-1 * Defualt.Default._H, -100));
+                health = 50; speed = 2; bulletvelocity = 5; firerate = 80; bulletdamage = 30;
             }
 
 
         }
 
-        //Load method
-        public void LoadContent(ContentManager Content) {
-            if (shiptype == 0) {
-                
-            }
-
-        }
-
+       
         //Draw method
         public void Draw(SpriteBatch spritebatch) {
             if (isVisible) {
@@ -71,8 +62,8 @@ namespace _2Dshootertutorial {
         public void Update(GameTime gametime) {
 
             //set bounding box for collision
-            boundingBox = new Rectangle((int)(position.X - (texture.Width / 2)), (int)(position.Y - (texture.Height / 2)), texture.Width, texture.Height);
-
+            boundingBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            
             //update movement
             position.Y += speed;
             if (position.Y >= Defualt.Default._H + 100)
@@ -87,21 +78,21 @@ namespace _2Dshootertutorial {
 
         //shoot bullets helper function
         private void shoot_bullets() {
+
              //shoot only if the bullet delay is set
-            if (bulletDelay >= shootspeed) {
+            if (bulletDelay >= firerate) {
 
                 //Determine bullet texture, and bullet position
+
+                //defualt, medium fighter type
                 if (shiptype == 0) {
                     Bullet b = new Bullet(bulletTexture);
-                    b.position = new Vector2(position.X + texture.Width / 2 - b.texture.Width / 2,
-                                            position.Y + texture.Height / 2 - b.texture.Height / 2);
+                    b.position = new Vector2(position.X + texture.Width / 2 - b.texture.Width / 2, position.Y + texture.Height / 2 - b.texture.Height / 2);
                     b.isVisible = true;
                     bulletDelay = 0;
                     if (bullets.Count() < 20) bullets.Add(b); //add bullet
                 }      
-                       
             }
-
         }
 
 
@@ -110,7 +101,7 @@ namespace _2Dshootertutorial {
 
             //move all bullets that are owned by the ship
             for (int i = 0; i < bullets.Count(); i++) {
-                bullets[i].position.Y += bulletspeed; //move bullet
+                bullets[i].position.Y += bulletvelocity; //move bullet
                 bullets[i].boundingBox = new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, bulletTexture.Width, bulletTexture.Height);
                 if (bullets[i].position.Y <= 0 || !bullets[i].isVisible) {
                     bullets[i].isVisible = false;

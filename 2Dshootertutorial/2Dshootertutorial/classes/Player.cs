@@ -25,20 +25,24 @@ namespace _2Dshootertutorial {
         public List<Bullet> bullets;
 
         //other
-        public int health,score;
+        public int health,score,laserDamage;
         SoundManager sm;
 
         //Defualt Constructor
         public Player(){
 
-            //set some varibles
+            //set important properties
+            health = 100;
+            speed = Defualt.Default.PlayerDefualtSpeed;
+            laserDamage = 25;
+
+            //set other stuff
             texture = null;
             position = new Vector2(300, 600);
-            speed = Defualt.Default.PlayerDefualtSpeed;
             isVisible = true;
             bullets = new List<Bullet>();
             bulletDelay = Defualt.Default.PlayerShootSpeed;
-            health = 100; score = 0;
+            score = 0;
             sm = new SoundManager();
         }
 

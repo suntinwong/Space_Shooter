@@ -17,8 +17,8 @@ namespace _2Dshootertutorial {
         public bool isVisible;
 
         //Constructor
-        public Explosion(Texture2D newtexture,Vector2 newposition,float newinterval, float newscale) {
-            texture = newtexture;
+        public Explosion(ContentManager Content,Vector2 newposition,float newinterval, float newscale) {
+            texture = Content.Load<Texture2D>("explosion3");
             position = newposition;
             timer = 0f;
             interval = newinterval;

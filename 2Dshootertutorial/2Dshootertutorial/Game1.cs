@@ -79,10 +79,12 @@ namespace _2Dshootertutorial {
             if (gamestate == 1) {
                 sf.Update(gameTime);                            //update starfield
                 if(p.isVisible) p.Update(gameTime);             //update player
-                UpdateAsteroids(gameTime); AsteroidCollisions();//update asteroids & collisions
+                UpdateAsteroids(gameTime);                      //update asteroids
                 UpdateExplosions(gameTime);                     //update explosions
                 UpdateEnemies(gameTime);                        //update enemies
+                UpdateCollisions(gameTime);                     //update all collisions
                 hud.Update(p.score, p.health);                  //update the hud
+                
                 base.Update(gameTime);
                 
             }
@@ -127,7 +129,7 @@ namespace _2Dshootertutorial {
 
             //Add more asteroids if needed
             if (asteroids.Count() < Defualt.Default.AsteroidMax)
-                asteroids.Add(new Asteroid(Content.Load<Texture2D>("asteroid"), new Vector2(randX, randY)));
+                asteroids.Add(new Asteroid(Content, new Vector2(randX, randY)));
 
             //Remove or update all asteroids
             for (int i = 0; i < asteroids.Count(); i++) {
@@ -137,31 +139,75 @@ namespace _2Dshootertutorial {
             }
         }
 
-        //Checks collisions with asteroids, and act appropaitly
-        private void AsteroidCollisions() {
+        //Handle all collisions
+        private void UpdateCollisions(GameTime gameTime){
+            
+            //Do all player lazer collisions
+            for (int i = 0; i < p.bullets.Count(); i++) {
 
-            //Check collisions with asteroids and other objects
-            for (int i = 0; i < asteroids.Count(); i++) {
-
-                if (p.boundingBox.Intersects(asteroids[i].boundingBox)) { //collision of asteroid & player
-                    explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), asteroids[i].position,20f,1f));
-                    asteroids[i].isVisible = false;
-                    p.health -= 35;
-                    if (p.health < 1) GameOverState();
-                    sm.explodeSound.Play();
-                    
+                //Check asteroids
+                for (int j = 0; j < asteroids.Count(); j++) {
+                    if(p.bullets[i].boundingBox.Intersects(asteroids[j].boundingBox)){
+                        asteroids[j].health -= p.laserDamage;
+                        p.bullets[i].isVisible = false;
+                        if(asteroids[j].health <= 0){ //when its killed
+                            explosions.Add(new Explosion(Content, asteroids[j].position,20f,1f));
+                            sm.explodeSound.Play();
+                            asteroids[j].isVisible = false;
+                            p.score += 1;
+                        } 
+                        else explosions.Add(new Explosion(Content, p.bullets[i].position, 20f, .33f));
+                    }
                 }
 
-                for (int j = 0; j < p.bullets.Count(); j++) { 
-                    if (p.bullets[j].boundingBox.Intersects(asteroids[i].boundingBox)) { //collision of asteroid & bullet
-                        explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), asteroids[i].position,20f,1f));
-                        p.bullets[j].isVisible = false;
-                        asteroids[i].isVisible = false;
-                        p.score++;
+                //Check enemy ships
+                for(int j = 0; j < enemies.Count(); j++){
+                    if(p.bullets[i].boundingBox.Intersects(enemies[j].boundingBox)){
+                        enemies[j].health -= p.laserDamage;
+                        p.bullets[i].isVisible = false;
+                        if (enemies[j].health <= 0) { //when its killed
+                            explosions.Add(new Explosion(Content, new Vector2( enemies[j].position.X +  enemies[j].texture.Width/2, enemies[j].position.Y +  enemies[j].texture.Height/2) , 20f, 1f));
+                            sm.explodeSound.Play();
+                            enemies[j].isVisible = false;
+                            p.score += 5;
+                        } 
+                        else explosions.Add(new Explosion(Content, p.bullets[i].position, 20f, .33f));
+                    }
+                }
+            }
+
+            //Check if player collides with enemy lasers or enemy ship
+            for (int i = 0; i < enemies.Count(); i++) {
+                for (int j = 0; j < enemies[i].bullets.Count(); j++) { //check lasers
+                    if (p.boundingBox.Intersects(enemies[i].bullets[j].boundingBox)) {
+                        enemies[i].bullets[j].isVisible = false;
+                        p.health -= (int)enemies[i].bulletdamage;
+                        explosions.Add(new Explosion(Content, enemies[i].bullets[j].position, 20f, .33f));
                         sm.explodeSound.Play();
                     }
                 }
-            }    
+                if (p.boundingBox.Intersects(enemies[i].boundingBox)) {  //check actual ship
+                    if (p.health + 100 > enemies[i].health) { 
+                        enemies[i].isVisible = false;
+                        explosions.Add(new Explosion(Content, enemies[i].position, 20f, 1f));
+                        sm.explodeSound.Play();
+                    } 
+                    p.health -= enemies[i].health;
+                }
+            }
+
+            //check if player collides with asteroids
+            for (int i = 0; i < asteroids.Count(); i++) {
+                if (p.boundingBox.Intersects(asteroids[i].boundingBox)) {
+                    p.health -= asteroids[i].damage;
+                    asteroids[i].isVisible = false;
+                    explosions.Add(new Explosion(Content, asteroids[i].position, 20f, 1f));
+                    sm.explodeSound.Play();
+                }
+            }
+
+           if (p.health <= 0) GameOverState();
+
         }
 
         //update enemies helper funciton
@@ -180,7 +226,6 @@ namespace _2Dshootertutorial {
 
         }
 
-
         //update explisions helper function
         private void UpdateExplosions(GameTime gametime) {
             for (int i = 0; i < explosions.Count(); i++) {
@@ -192,7 +237,7 @@ namespace _2Dshootertutorial {
         //Player has died, game over state
         private void GameOverState() {
 
-            explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), p.position, 40f, 3f));
+            explosions.Add(new Explosion(Content, p.position, 40f, 3f));
             MediaPlayer.Stop();
             p.kill_player();
             gameoverflag = true;
