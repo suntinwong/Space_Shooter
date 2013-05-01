@@ -24,6 +24,8 @@ namespace _2Dshootertutorial {
         List<Asteroid> asteroids = new List<Asteroid>(); //make asteroid list
         List<Explosion> explosions = new List<Explosion>(); //make explosion list
         HUD hud = new HUD(); //make hud
+        SoundManager sm = new SoundManager(); //sound manager 
+       
 
         int state = 1;
 
@@ -54,7 +56,8 @@ namespace _2Dshootertutorial {
             p.LoadContent(Content); //load the player
             sf.LoadContent(Content); //load the starfield
             hud.LoadContent(Content); //Load hud
-
+            sm.LoadContent(Content); //load sound manager
+            MediaPlayer.Play(sm.bgm1); //play background music
         }
 
 
@@ -135,6 +138,8 @@ namespace _2Dshootertutorial {
                     asteroids[i].isVisible = false;
                     p.health -= 35;
                     if (p.health < 1) GameOverState();
+                    sm.explodeSound.Play();
+                    
                 }
 
                 for (int j = 0; j < p.bullets.Count(); j++) { 
@@ -143,6 +148,7 @@ namespace _2Dshootertutorial {
                         p.bullets[j].isVisible = false;
                         asteroids[i].isVisible = false;
                         p.score++;
+                        sm.explodeSound.Play();
                     }
                 }
             }
@@ -152,6 +158,7 @@ namespace _2Dshootertutorial {
         private void GameOverState() {
 
             explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), p.position, 40f, 3f));
+            MediaPlayer.Stop();
             p.kill_player();
             
             //Exit();

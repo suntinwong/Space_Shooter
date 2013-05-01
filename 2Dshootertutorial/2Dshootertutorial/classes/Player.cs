@@ -26,6 +26,7 @@ namespace _2Dshootertutorial {
 
         //other
         public int health,score;
+        SoundManager sm;
 
         //Defualt Constructor
         public Player(){
@@ -38,12 +39,14 @@ namespace _2Dshootertutorial {
             bullets = new List<Bullet>();
             bulletDelay = Defualt.Default.PlayerShootSpeed;
             health = 100; score = 0;
+            sm = new SoundManager();
         }
 
         //load content
         public void LoadContent(ContentManager Content){
             texture = Content.Load<Texture2D>("ship");
             bulletTexture = Content.Load<Texture2D>("playerbullet");
+            sm.LoadContent(Content);
         }
 
         //draw funciton
@@ -107,6 +110,7 @@ namespace _2Dshootertutorial {
                 b.isVisible = true;
                 if (bullets.Count() < 20) bullets.Add(b);
                 bulletDelay = 0;
+                sm.playerShootSound.Play();
             }
         }
 
