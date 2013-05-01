@@ -21,7 +21,7 @@ namespace _2Dshootertutorial {
 
         //Bullet stuff
         public Texture2D bulletTexture;
-        public float bulletDelay,bulletspeed;
+        public float bulletDelay,bulletspeed,firerate;
         public List<Bullet> bullets;
 
         //other
@@ -33,15 +33,16 @@ namespace _2Dshootertutorial {
 
             //set important properties
             health = 100;
-            speed = Defualt.Default.PlayerDefualtSpeed;
+            speed = 5;
             laserDamage = 25;
+            firerate = 20;
 
             //set other stuff
             texture = null;
             position = new Vector2(300, 600);
             isVisible = true;
             bullets = new List<Bullet>();
-            bulletDelay = Defualt.Default.PlayerShootSpeed;
+            bulletDelay = firerate;
             score = 0;
             sm = new SoundManager();
         }
@@ -108,7 +109,7 @@ namespace _2Dshootertutorial {
         public void shoot_bullet() {
 
             //shoot only if the bullet delay is set. particle originates in center of player
-            if (bulletDelay >= Defualt.Default.PlayerShootSpeed) {
+            if (bulletDelay >= firerate) {
                 Bullet b = new Bullet(bulletTexture);
                 b.position = new Vector2(position.X + texture.Width / 2 - b.texture.Width / 2, position.Y + texture.Height / 2 - b.texture.Height / 2);
                 b.isVisible = true;

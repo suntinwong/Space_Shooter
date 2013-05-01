@@ -129,7 +129,7 @@ namespace _2Dshootertutorial {
 
             //Add more asteroids if needed
             if (asteroids.Count() < Defualt.Default.AsteroidMax)
-                asteroids.Add(new Asteroid(Content, new Vector2(randX, randY)));
+                asteroids.Add(new Asteroid(Content));
 
             //Remove or update all asteroids
             for (int i = 0; i < asteroids.Count(); i++) {
@@ -206,7 +206,7 @@ namespace _2Dshootertutorial {
                 }
             }
 
-           if (p.health <= 0) GameOverState();
+           if (p.health <= 0 && !gameoverflag) GameOverState();
 
         }
 

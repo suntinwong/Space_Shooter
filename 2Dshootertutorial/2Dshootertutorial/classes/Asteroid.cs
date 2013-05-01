@@ -16,23 +16,21 @@ namespace _2Dshootertutorial {
         public bool isVisible;
         public Rectangle boundingBox;
         Random random = new Random();
-        public float randX, randY;
 
         //constructor
-        public Asteroid(ContentManager Content, Vector2 newposition) {
+        public Asteroid(ContentManager Content) {
 
             //Asteroid basic properties
             health = 25;
-            speed = Defualt.Default.AsteroidDefualtSpeed;
+            speed = 4;
             damage = 25;
 
             //Other stuff
             texture = Content.Load<Texture2D>("asteroid");
-            position = newposition;
+            position = new Vector2(random.Next(0, Defualt.Default._W - texture.Width), random.Next(Defualt.Default._H * -2, -50));
             rotationAngle = 0;
             isVisible = true;
-            randX = random.Next(0, Defualt.Default._W);
-            randY = random.Next(Defualt.Default._H * -2, -50);
+
         }
 
         //Load content method

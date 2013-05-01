@@ -41,7 +41,7 @@ namespace _2Dshootertutorial {
             if (type == 0) {
                 texture = Content.Load<Texture2D>("enemyship0");
                 bulletTexture = Content.Load<Texture2D>("enemybullet0");
-                position = new Vector2(random.Next(0, Defualt.Default._W), random.Next(-1 * Defualt.Default._H, -100));
+                position = new Vector2(random.Next(0, Defualt.Default._W) - texture.Width, random.Next(-1 * Defualt.Default._H, -100));
                 health = 50; speed = 2; bulletvelocity = 5; firerate = 80; bulletdamage = 30;
             }
 

@@ -61,66 +61,6 @@ namespace _2Dshootertutorial {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int PlayerDefualtSpeed {
-            get {
-                return ((int)(this["PlayerDefualtSpeed"]));
-            }
-            set {
-                this["PlayerDefualtSpeed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int StarfieldDefualtSpeed {
-            get {
-                return ((int)(this["StarfieldDefualtSpeed"]));
-            }
-            set {
-                this["StarfieldDefualtSpeed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4")]
-        public int AsteroidDefualtSpeed {
-            get {
-                return ((int)(this["AsteroidDefualtSpeed"]));
-            }
-            set {
-                this["AsteroidDefualtSpeed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        public int BulletDefualtSpeed {
-            get {
-                return ((int)(this["BulletDefualtSpeed"]));
-            }
-            set {
-                this["BulletDefualtSpeed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public int PlayerShootSpeed {
-            get {
-                return ((int)(this["PlayerShootSpeed"]));
-            }
-            set {
-                this["PlayerShootSpeed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int AsteroidMax {
             get {

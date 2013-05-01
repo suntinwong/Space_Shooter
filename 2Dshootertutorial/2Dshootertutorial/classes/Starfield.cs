@@ -16,7 +16,7 @@ namespace _2Dshootertutorial {
 
         public Texture2D texture;
         public Vector2 bgPosition1,bgPosition2; //bg#1,bg#2 positions
-        public int speed;
+        public float speed;
 
 
         //Constructor
@@ -24,7 +24,7 @@ namespace _2Dshootertutorial {
             texture = null;
             bgPosition1 = new Vector2(0, 0);
             bgPosition2 = new Vector2(0, -1 * Defualt.Default._H);
-            speed = Defualt.Default.StarfieldDefualtSpeed;
+            speed = 1f;
         }
 
         //load content
