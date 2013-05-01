@@ -17,7 +17,7 @@ namespace _2Dshootertutorial {
         public Vector2 position;
         public int speed; //ship's movement speed
         public Rectangle boundingBox;
-        public bool isColliding;
+        public bool isColliding, isVisible;
 
         //Bullet stuff
         public Texture2D bulletTexture;
@@ -34,7 +34,7 @@ namespace _2Dshootertutorial {
             texture = null;
             position = new Vector2(300, 600);
             speed = Defualt.Default.PlayerDefualtSpeed;
-            isColliding = false;
+            isColliding = false; isVisible = true;
             bullets = new List<Bullet>();
             bulletDelay = Defualt.Default.PlayerShootSpeed;
             health = 100; score = 0;
@@ -48,7 +48,7 @@ namespace _2Dshootertutorial {
 
         //draw funciton
         public void Draw(SpriteBatch spriteBatch){
-            spriteBatch.Draw(texture, position, Color.White); //draw players
+            if(isVisible) spriteBatch.Draw(texture, position, Color.White); //draw players
             foreach (Bullet i in bullets) i.Draw(spriteBatch); //draw bullets
         }
 
@@ -108,8 +108,6 @@ namespace _2Dshootertutorial {
                 if (bullets.Count() < 20) bullets.Add(b);
                 bulletDelay = 0;
             }
-
-     
         }
 
         //update bullets
@@ -118,12 +116,19 @@ namespace _2Dshootertutorial {
              for(int i = 0; i < bullets.Count(); i++) {
                 bullets[i].position.Y -= bullets[i].speed; //move bullet
                 bullets[i].boundingBox = new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, bulletTexture.Width, bulletTexture.Height);
-                if (bullets[i].position.Y <= 0) {
+                if (bullets[i].position.Y <= 0 || !bullets[i].isVisible) {
                     bullets[i].isVisible = false;
                     bullets.RemoveAt(i); //remove bullet if it is not visible
                 }
+
             }
              bulletDelay++;
+        }
+
+        //Destroy the player ship
+        public void kill_player() {
+            boundingBox = new Rectangle(-1000, 0, 0, 0);
+            isVisible = false;
         }
 
     }

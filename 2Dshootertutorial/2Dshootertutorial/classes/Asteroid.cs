@@ -26,7 +26,7 @@ namespace _2Dshootertutorial {
             speed = Defualt.Default.AsteroidDefualtSpeed;
             isVisible = true;
             randX = random.Next(0, Defualt.Default._W);
-            randY = random.Next(Defualt.Default._H * -1, -50);
+            randY = random.Next(Defualt.Default._H * -2, -50);
         }
 
         //Load content method

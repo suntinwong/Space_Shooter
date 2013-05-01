@@ -41,6 +41,7 @@ namespace _2Dshootertutorial{
 
         //Update Method
         public void Update(int newscore, int newhealth) {
+            if (newhealth < 0) newhealth = 0;
             scoreText = "Score: " + newscore;
             healthText = "Health: " + newhealth + "%";
         

@@ -20,7 +20,7 @@ namespace _2Dshootertutorial {
         //Constructor
         public Bullet(Texture2D newtexture) {
             texture = newtexture;
-            isVisible = false;
+            isVisible = true;
             speed = Defualt.Default.BulletDefualtSpeed;
         }
 

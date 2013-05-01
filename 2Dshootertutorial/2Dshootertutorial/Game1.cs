@@ -25,6 +25,8 @@ namespace _2Dshootertutorial {
         List<Explosion> explosions = new List<Explosion>(); //make explosion list
         HUD hud = new HUD(); //make hud
 
+        int state = 1;
+
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -69,13 +71,14 @@ namespace _2Dshootertutorial {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             
-            sf.Update(gameTime); //update starfield
-            p.Update(gameTime); //update player
-            UpdateAsteroids(gameTime); //update asteroids
-            UpdateExplosions(gameTime); //update explosions
-            AsteroidCollisions(); //do collision logic with asteroids
-            hud.Update(p.score, p.health); //update the hud
-            base.Update(gameTime);
+                sf.Update(gameTime); //update starfield
+                if(p.isVisible) p.Update(gameTime); //update player
+                UpdateAsteroids(gameTime); //update asteroids
+                UpdateExplosions(gameTime); //update explosions
+                AsteroidCollisions(); //do collision logic with asteroids
+                hud.Update(p.score, p.health); //update the hud
+                base.Update(gameTime);
+            
         }
 
        //draw
@@ -147,7 +150,11 @@ namespace _2Dshootertutorial {
 
         //Player has died, game over state
         private void GameOverState() {
-            Exit();
+
+            explosions.Add(new Explosion(Content.Load<Texture2D>("explosion3"), p.position, 40f, 3f));
+            p.kill_player();
+            
+            //Exit();
 
         }
 
