@@ -32,10 +32,10 @@ namespace _2Dshootertutorial {
         public Player(){
 
             //set important properties
-            health = 100;
-            speed = 5;
-            laserDamage = 25;
-            firerate = 20;
+            health = 100;           //player's hitpoints
+            speed = 5;              //Move speed
+            laserDamage = 25;       //per laser hit damage
+            firerate = 20;          //fire rate of lasers
 
             //set other stuff
             texture = null;
