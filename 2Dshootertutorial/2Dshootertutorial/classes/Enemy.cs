@@ -37,23 +37,27 @@ namespace _2Dshootertutorial {
             bullets = new List<Bullet>();
             bulletDelay = 0;
 
-            //defualt, medium fighter type
+            //Defualt type 0, medium fighter type
             if (type == 0) {
                 texture = Content.Load<Texture2D>("enemyship0");
                 bulletTexture = Content.Load<Texture2D>("enemybullet0");
                 position = new Vector2(random.Next(0, Defualt.Default._W) - texture.Width, random.Next(-1 * Defualt.Default._H, -100));
                 health = 50; speed = 2; bulletvelocity = 5; firerate = 80; bulletdamage = 30;
             }
-
-
         }
 
        
         //Draw method
         public void Draw(SpriteBatch spritebatch) {
+
+            //Only draw if the ship is visible
             if (isVisible) {
+
+                //Draw the actual ship
                 spritebatch.Draw(texture, position, Color.White);
-                for (int i = 0; i < bullets.Count(); i++)
+
+                //Draw all bullets associated with the ship
+                for (int i = 0; i < bullets.Count(); i++) 
                     bullets[i].Draw(spritebatch);
             }
         }
@@ -66,8 +70,7 @@ namespace _2Dshootertutorial {
             
             //update movement
             position.Y += speed;
-            if (position.Y >= Defualt.Default._H + 100)
-                isVisible = false;
+            if (position.Y >= Defualt.Default._H + 100) isVisible = false;
 
             //only shoot bullets if they are on the screen
             if (position.Y > 0) shoot_bullets();
@@ -79,12 +82,10 @@ namespace _2Dshootertutorial {
         //shoot bullets helper function
         private void shoot_bullets() {
 
-             //shoot only if the bullet delay is set
+             //shoot only if the bullet delay is set - Determine bullet texture, and bullet position
             if (bulletDelay >= firerate) {
 
-                //Determine bullet texture, and bullet position
-
-                //defualt, medium fighter type
+                //Defualt, medium fighter type
                 if (shiptype == 0) {
                     Bullet b = new Bullet(bulletTexture);
                     b.position = new Vector2(position.X + texture.Width / 2 - b.texture.Width / 2, position.Y + texture.Height / 2 - b.texture.Height / 2);
