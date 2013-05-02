@@ -209,7 +209,7 @@ namespace _2Dshootertutorial {
         private void UpdateEnemies(GameTime gameTime) {
 
             //Add more enemies if needed
-            if (enemies.Count() < Defualt.Default.EnemyMax) {
+            if (enemies.Count() < ( Defualt.Default.EnemyMax + (int)(p.score / 25) )) {
                
                 enemies.Add(new Enemy(Content,RandomShipType(), random.Next(0, Defualt.Default._W-30), random.Next(-2 * Defualt.Default._H, -250)));
             }
@@ -244,8 +244,12 @@ namespace _2Dshootertutorial {
         private int RandomShipType() {
             int shiptype = 0;
             int rand = random.Next(0, 100);
-            if (rand > 85) shiptype = 1;
-            else if (rand > 70) shiptype = 2;
+            if(rand > 95)
+            if (rand > 80) shiptype = 1;
+            else if (rand > 65) shiptype = 2;
+
+            //shiptype = 3;
+
             return shiptype;
         }
     }

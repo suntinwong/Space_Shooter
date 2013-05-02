@@ -38,7 +38,7 @@ namespace _2Dshootertutorial{
         //Draw Method
         public void Draw(SpriteBatch spritebatch) {
             spritebatch.Draw(border, new Vector2(0 - border.Width,0), Color.White);
-            spritebatch.Draw(border, new Vector2(Defualt.Default._W + border.Width, 0), Color.White);
+            spritebatch.Draw(border, new Vector2(Defualt.Default._W, 0), Color.White);
             spritebatch.Draw(hp_empty, healthPos, Color.White);
             spritebatch.DrawString(spritefont, scoreText, scorePos, textColor, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
             spritebatch.Draw(hp_empty, healthPos, Color.White);

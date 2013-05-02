@@ -28,7 +28,7 @@ namespace _2Dshootertutorial {
 
         //draw method
         public void Draw(SpriteBatch spritebatch){
-            if(isVisible && position.X > 0 && position.X < Defualt.Default._W) 
+            if(isVisible) 
                 spritebatch.Draw(texture, position, null, Color.White, rotation, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
         }
 
