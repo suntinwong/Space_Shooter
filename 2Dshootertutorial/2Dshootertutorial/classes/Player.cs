@@ -116,7 +116,7 @@ namespace _2Dshootertutorial {
                 b.isVisible = true;
                 if (bullets.Count() < 20) bullets.Add(b);
                 bulletDelay = 0;
-                sm.playerShootSound.Play();
+                sm.playerShootSound.Play(.1f,0,0);
             }
         }
 
