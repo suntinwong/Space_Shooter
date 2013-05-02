@@ -65,7 +65,7 @@ namespace _2Dshootertutorial {
         public void Update(GameTime gameTime) {
 
             //update boundingBox
-            boundingBox = new Rectangle((int)position.X, (int)position.Y, texture.Width-10, texture.Height-16);
+            boundingBox = new Rectangle((int)position.X, (int)position.Y, texture.Width-5, texture.Height-8);
 
             bool moveLeft, moveRight, moveUp, moveDown,firebullets;
 
