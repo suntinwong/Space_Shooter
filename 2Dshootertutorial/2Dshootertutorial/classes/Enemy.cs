@@ -81,8 +81,18 @@ namespace _2Dshootertutorial {
                 Random random = new Random();
                 texture = Content.Load<Texture2D>("Artwork/enemyship3");
                 bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet2");
-                health = 400; speedX = .35f; bulletvelocity = 7.5f; firerate = 150; bulletdamage = 30; score = 30;
-                position = new Vector2(-1 * texture.Width, random.Next(0, 200));
+                position = new Vector2(-1 * texture.Width - 10, random.Next(0, 200));
+                health = 400; speedX = .25f; bulletvelocity = 7.5f; firerate = 125; bulletdamage = 30; score = 30;
+            }
+
+            //Type 5, large destroyer #2
+            else if (type == 5) {
+                Random random = new Random();
+                texture = Content.Load <Texture2D>("Artwork/enemyship5");
+                bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet0");
+                position = new Vector2(Defualt.Default._W + 10, random.Next(0, 200));
+                health = 400; speedX = -.25f; bulletvelocity = 4.75f; firerate = 125; bulletdamage = 30; score = 30;
+
             }
         }
 
@@ -108,7 +118,7 @@ namespace _2Dshootertutorial {
             //update movement
             position.Y += speedY;
             position.X += speedX;
-            if (position.Y >= Defualt.Default._H + 400 || position.X > Defualt.Default._W || position.X + texture.Width < 0)
+            if (position.Y >= Defualt.Default._H + 400 || position.X > Defualt.Default._W + 25 || position.X + texture.Width < -25)
                 isVisible = false;
 
             //only shoot bullets if they are on the screen
@@ -170,7 +180,15 @@ namespace _2Dshootertutorial {
                     b1.speedY = (playerpos.Y - b1.position.Y) / (bulletvelocity * 15);
                     b1.rotation = (float)(Math.Atan2((b1.position.X - playerpos.X), (playerpos.Y - b1.position.Y)));
                     bullets.Add(b1); //add bullet
+                }
 
+                //Cruiser - 8 downward dumb bullets
+                else if (shiptype == 5) {
+                    for (int i = 0; i < 6; i++) {
+                        Bullet b = new Bullet(bulletTexture, bulletvelocity);
+                        b.position = new Vector2(position.X  + ((i* .16f)* texture.Width) - b.texture.Width / 2, position.Y + texture.Height / 2 - b.texture.Height / 2);
+                        bullets.Add(b); //add bullet
+                    }
                 }
             }
         }

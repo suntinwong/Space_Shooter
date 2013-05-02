@@ -262,11 +262,13 @@ namespace _2Dshootertutorial {
         private int RandomShipType() {
             int shiptype = 4;
             int rand = random.Next(0, 100);
+            if (rand > 99) shiptype = 5;
             if (rand > 98) shiptype = 3;
             else if (rand > 89) shiptype = 2;
             else if (rand > 81) shiptype = 1;
             else if (rand > 50) shiptype = 0;
 
+            shiptype = 5;
             return shiptype;
         }
     
