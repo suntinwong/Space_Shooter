@@ -11,7 +11,7 @@ namespace _2Dshootertutorial{
     public class HUD {
 
         SpriteFont spritefont;
-        Texture2D hp_empty, hp_greenbar,border;
+        Texture2D hp_empty, hp_greenbar,border,instruction;
         string scoreText, healthText;
         Vector2 scorePos, healthPos;
         Color textColor;
@@ -33,6 +33,8 @@ namespace _2Dshootertutorial{
             hp_empty = content.Load<Texture2D>("Artwork/hp_empty"); 
             hp_greenbar = content.Load<Texture2D>("Artwork/hp_greenbar");
             border = content.Load<Texture2D>("Artwork/blackborder");
+            instruction  = content.Load<Texture2D>("Artwork/instructions");
+            
         }
 
         //Draw Method
@@ -57,6 +59,11 @@ namespace _2Dshootertutorial{
             string text2 = "Your Final Score: " + newscore;
             Vector2 pos2 = new Vector2( ((Defualt.Default._W)/2)-75, (Defualt.Default._H / 2) +30);
             spritebatch.DrawString(spritefont, text2, pos2, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
+        }
+
+        public void Draw_instructions(SpriteBatch spritebatch) {
+            spritebatch.Draw(instruction, new Vector2(0,0), Color.White);
+
         }
 
 

@@ -40,7 +40,7 @@ namespace _2Dshootertutorial {
 
             //set other stuff
             texture = null;
-            position = new Vector2(300, 600);
+            position = new Vector2(300, 650);
             isVisible = true;
             bullets = new List<Bullet>();
             bulletDelay = firerate;

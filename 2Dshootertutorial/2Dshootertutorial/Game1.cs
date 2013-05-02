@@ -30,7 +30,7 @@ namespace _2Dshootertutorial {
         SoundManager sm = new SoundManager(); //sound manager 
        
         //Game varibles
-        int gamestate = 1;
+        int gamestate = 0;
         bool gameoverflag = false;
 
         public Game1() {
@@ -59,7 +59,6 @@ namespace _2Dshootertutorial {
             sf.LoadContent(Content); //load the starfield
             hud.LoadContent(Content); //Load hud
             sm.LoadContent(Content); //load sound manager
-            MediaPlayer.Play(sm.bgm1); //play background music
         }
 
 
@@ -76,6 +75,14 @@ namespace _2Dshootertutorial {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            //When in the splash screen
+            if (gamestate == 0) {
+                if (gameTime.TotalGameTime.TotalSeconds > 5) {
+                    MediaPlayer.Play(sm.bgm1); //play background music
+                    gamestate = 1;
+                }
+            }
+
             //When in playing game state
             if (gamestate == 1) {
                 sf.Update(gameTime);                            //update starfield
@@ -90,6 +97,12 @@ namespace _2Dshootertutorial {
             //Game wait between game state and gameover state
             if (gameoverflag) if (gameTime.TotalGameTime.Seconds % 16 == 0) gamestate = 2;
 
+            //When it is in game over state
+            if (gamestate == 2) {
+                if (gameTime.TotalGameTime.Seconds % 9 == 0)
+                    New_Game();
+            }
+
             base.Update(gameTime);
         }
 
@@ -97,6 +110,12 @@ namespace _2Dshootertutorial {
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
+
+            //When in the game loading/instruction state
+            if(gamestate == 0){
+                hud.Draw_instructions(spriteBatch);
+
+            }
 
             //When in playing game state
             if (gamestate == 1) { 
@@ -237,7 +256,6 @@ namespace _2Dshootertutorial {
             MediaPlayer.Stop();
             p.kill_player();
             gameoverflag = true;
-
         }
 
         //get a random shiptype number
@@ -251,5 +269,28 @@ namespace _2Dshootertutorial {
 
             return shiptype;
         }
+    
+        //reset the game
+        private void New_Game() {
+
+            //Clear all lists
+            enemies.Clear();
+            asteroids.Clear();
+            explosions.Clear();
+            p.bullets.Clear();
+
+            //Reset player
+            p.score = 0;
+            p.health = 100;
+            p.position = new Vector2(300, 650);
+            p.isVisible = true;
+            sf.bgPosition1 = new Vector2(0, 0);
+            sf.bgPosition2 = new Vector2(0, -1 * sf.texture.Height);
+
+            //Reset game states
+            gamestate = 1;
+            gameoverflag = false;
+        }
+    
     }
 }
