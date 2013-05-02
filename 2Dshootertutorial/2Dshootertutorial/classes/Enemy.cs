@@ -35,39 +35,54 @@ namespace _2Dshootertutorial {
             shiptype = type;
             isVisible = true;
             bullets = new List<Bullet>();
-            bulletDelay = 0;
+            bulletDelay = 100;
             speedX = 0; speedY = 0;
             position = new Vector2(posx, posy);
             
 
-            //Defualt type 0, medium fighter type
-            if (type == 0) {
+            //Type 4, small fast fighter
+            if (type == 4) {
+                Random random = new Random();
+                position = new Vector2(posx, random.Next(-200, -50));
+                speedX = (float)(random.Next(-12, 12)) / 20f;
+                texture = Content.Load<Texture2D>("Artwork/enemyship4");
+                bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet0");
+                health = 25; speedY = 4.5f; bulletvelocity = 999f; firerate = 999; bulletdamage = 12; score = 4;
+            }
+
+            //Type 0, medium fighter type
+            else if (type == 0) {
+
+                Random random = new Random();
+                position = new Vector2(posx, random.Next(-200, -50));
+                speedX = (float)(random.Next(-10, 10)) / 20f;
                 texture = Content.Load<Texture2D>("Artwork/enemyship0");
                 bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet0");
-                health = 50; speedY = 2.5f; bulletvelocity = 5f; firerate = 75; bulletdamage = 15; score = 5;
-            } 
-            
+                health = 50; speedY = 2.25f; bulletvelocity = 5.5f; firerate = 125; bulletdamage = 12; score = 5;
+
+            }
+
             //Type 1, large fighter type
             else if (type == 1) {
                 texture = Content.Load<Texture2D>("Artwork/enemyship1");
                 bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet0");
-                health = 100; speedY = 1.25f; bulletvelocity = 5f; firerate = 100; bulletdamage = 15; score = 10;
+                health = 100; speedY = 1.25f; bulletvelocity = 5.5f; firerate = 100; bulletdamage = 12; score = 15;
             }
 
             //Type 2, large fighter type#2
             else if (type == 2) {
                 texture = Content.Load<Texture2D>("Artwork/enemyship2");
                 bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet1");
-                health = 100; speedY = 1.25f; bulletvelocity = 3.25f; firerate = 85; bulletdamage = 35; score = 10;
-            } 
-            
+                health = 100; speedY = 1.25f; bulletvelocity = 3.25f; firerate = 100; bulletdamage = 25; score = 15;
+            }
+
             //Type 3, large destroyer
             else if (type == 3) {
-                Random random = new Random(); 
+                Random random = new Random();
                 texture = Content.Load<Texture2D>("Artwork/enemyship3");
                 bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet2");
-                health = 400; speedX = .5f; bulletvelocity = 7.5f; firerate = 85; bulletdamage = 65; score = 50;
-                position = new Vector2(-1*texture.Width, random.Next(0, 200));
+                health = 400; speedX = .5f; bulletvelocity = 7.5f; firerate = 200; bulletdamage = 50; score = 30;
+                position = new Vector2(-1 * texture.Width, random.Next(0, 200));
             }
         }
 
@@ -110,42 +125,50 @@ namespace _2Dshootertutorial {
             if (bulletDelay >= firerate) {
                 bulletDelay = 0;
 
+
+                //small fighter type. does not shoot lasers
+                if (shiptype == 4) {
+
+
+                }
+
                 //Defualt, medium fighter type - one laser from center
-                if (shiptype == 0) {
-                    Bullet b = new Bullet(bulletTexture,bulletvelocity);
+                else if (shiptype == 0) {
+                    Bullet b = new Bullet(bulletTexture, bulletvelocity);
                     b.position = new Vector2(position.X + texture.Width / 2 - b.texture.Width / 2, position.Y + texture.Height / 2 - b.texture.Height / 2);
                     bullets.Add(b); //add bullet
                 }
 
                 //Large fighter type - three lasers fanned out
                 else if (shiptype == 1) {
-                    Bullet b1 = new Bullet(bulletTexture,bulletvelocity);
+                    Bullet b1 = new Bullet(bulletTexture, bulletvelocity);
                     b1.position = new Vector2(position.X + texture.Width / 2 - b1.texture.Width / 2, position.Y + texture.Height / 2 - b1.texture.Height / 2);
                     Bullet b2 = new Bullet(bulletTexture, bulletvelocity);
                     b2.position = new Vector2(position.X - b1.texture.Width / 2, position.Y + texture.Height / 2 - b1.texture.Height / 2);
-                    b2.rotation = 45; b2.speedX = -1 * bulletvelocity / 4; 
+                    b2.rotation = 45; b2.speedX = -1 * bulletvelocity / 4; b2.speedY = bulletvelocity * .75f;
                     Bullet b3 = new Bullet(bulletTexture, bulletvelocity);
                     b3.position = new Vector2(position.X + texture.Width - b1.texture.Width / 2, position.Y + texture.Height / 2 - b1.texture.Height / 2);
-                    b3.rotation = -45; b3.speedX = bulletvelocity / 4; 
+                    b3.rotation = -45; b3.speedX = bulletvelocity / 4; b3.speedY = bulletvelocity * .75f;
                     bullets.Add(b1); //add bullet
                     bullets.Add(b2);
                     bullets.Add(b3);
                 }
-      
+
                 //Large fighter type#2 - laser in general direction of player
                 else if (shiptype == 2) {
                     Bullet b = new Bullet(bulletTexture, bulletvelocity);
                     b.position = new Vector2(position.X + texture.Width / 2 - b.texture.Width / 2, position.Y + texture.Height / 2 - b.texture.Height / 2);
-                    b.speedX = (float)(Math.Atan2((playerpos.X - b.position.X),(playerpos.Y - b.position.Y ))); 
+                    b.speedX = (float)(Math.Atan2((playerpos.X - b.position.X), (playerpos.Y - b.position.Y)));
                     bullets.Add(b); //add bullet
                 }
-                
+
+                //cruiser - big fire ball to player's location
                 else if (shiptype == 3) {
                     Bullet b1 = new Bullet(bulletTexture, bulletvelocity);
-                    b1.position = new Vector2(position.X + texture.Width /2f - b1.texture.Width / 2, position.Y + texture.Height - b1.texture.Height / 2);
-                    b1.speedX = (playerpos.X - b1.position.X) / (bulletvelocity * 20);
-                    b1.speedY = (playerpos.Y - b1.position.Y) / (bulletvelocity * 20);
-                    b1.rotation = (float)(Math.Atan2((b1.position.X - playerpos.X), (playerpos.Y - b1.position.Y))); 
+                    b1.position = new Vector2(position.X + texture.Width / 2f - b1.texture.Width / 2, position.Y + texture.Height - b1.texture.Height / 2);
+                    b1.speedX = (playerpos.X - b1.position.X) / (bulletvelocity * 15);
+                    b1.speedY = (playerpos.Y - b1.position.Y) / (bulletvelocity * 15);
+                    b1.rotation = (float)(Math.Atan2((b1.position.X - playerpos.X), (playerpos.Y - b1.position.Y)));
                     bullets.Add(b1); //add bullet
 
                 }

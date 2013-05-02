@@ -11,8 +11,8 @@ namespace _2Dshootertutorial {
     public class Asteroid {
         public Texture2D texture;
         public Vector2 position, origin;
-        public float rotationAngle;
-        public int health,speed,damage;
+        public float rotationAngle,speed;
+        public int health,damage;
         public bool isVisible;
         public Rectangle boundingBox;
         Random random = new Random(); //seed random number for placement
@@ -22,7 +22,7 @@ namespace _2Dshootertutorial {
 
             //Asteroid basic properties
             health = 25;   //set the hitpoitns for the astroid
-            speed = 4;     //set the velocity at which it travels toward the player
+            speed = 1.75f;     //set the velocity at which it travels toward the player
             damage = 25;    //set the collision damage when it hits the player
 
             //Other stuff

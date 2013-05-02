@@ -88,7 +88,7 @@ namespace _2Dshootertutorial {
             }
 
             //Game wait between game state and gameover state
-            if (gameoverflag) if (gameTime.TotalGameTime.Seconds % 8 == 0) gamestate = 2;
+            if (gameoverflag) if (gameTime.TotalGameTime.Seconds % 16 == 0) gamestate = 2;
 
             base.Update(gameTime);
         }
@@ -149,7 +149,7 @@ namespace _2Dshootertutorial {
                             explosions.Add(new Explosion(Content, asteroids[j].position,20f,1f));
                             sm.explodeSound.Play();
                             asteroids[j].isVisible = false;
-                            p.score += 1;
+                            p.score += 2;
                         } 
                         else explosions.Add(new Explosion(Content, p.bullets[i].position, 20f, .33f));
                     }
@@ -182,12 +182,12 @@ namespace _2Dshootertutorial {
                     }
                 }
                 if (p.boundingBox.Intersects(enemies[i].boundingBox)) {  //check actual ship
-                    if (p.health + 100 > enemies[i].health) { 
+                    if (p.health + 200 > enemies[i].health) { 
                         enemies[i].isVisible = false;
                         explosions.Add(new Explosion(Content, enemies[i].position, 20f, 1f));
                         sm.explodeSound.Play();
                     } 
-                    p.health -= enemies[i].health;
+                    p.health -= enemies[i].health/2;
                 }
             }
 
@@ -209,7 +209,7 @@ namespace _2Dshootertutorial {
         private void UpdateEnemies(GameTime gameTime) {
 
             //Add more enemies if needed
-            if (enemies.Count() < ( Defualt.Default.EnemyMax + (int)(p.score / 25) )) {
+            if (enemies.Count() < ( Defualt.Default.EnemyMax + (int)(p.score / 25)  )) {
                
                 enemies.Add(new Enemy(Content,RandomShipType(), random.Next(0, Defualt.Default._W-30), random.Next(-2 * Defualt.Default._H, -250)));
             }
@@ -242,13 +242,12 @@ namespace _2Dshootertutorial {
 
         //get a random shiptype number
         private int RandomShipType() {
-            int shiptype = 0;
+            int shiptype = 4;
             int rand = random.Next(0, 100);
-            if(rand > 95)
-            if (rand > 80) shiptype = 1;
-            else if (rand > 65) shiptype = 2;
-
-            //shiptype = 3;
+            if (rand > 98) shiptype = 3;
+            else if (rand > 89) shiptype = 2;
+            else if (rand > 81) shiptype = 1;
+            else if (rand > 50) shiptype = 0;
 
             return shiptype;
         }
