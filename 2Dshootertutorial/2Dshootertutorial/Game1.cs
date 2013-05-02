@@ -267,8 +267,6 @@ namespace _2Dshootertutorial {
             else if (rand > 89) shiptype = 2;
             else if (rand > 81) shiptype = 1;
             else if (rand > 50) shiptype = 0;
-
-            shiptype = 5;
             return shiptype;
         }
     
