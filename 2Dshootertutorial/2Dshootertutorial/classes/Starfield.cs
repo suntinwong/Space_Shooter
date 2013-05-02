@@ -23,7 +23,7 @@ namespace _2Dshootertutorial {
         public Starfield() {
             texture = null;
             bgPosition1 = new Vector2(0, 0);
-            bgPosition2 = new Vector2(0, -1 * Defualt.Default._H);
+            bgPosition2 = new Vector2(0, -1920);
             speed = 1f;
         }
 
@@ -47,7 +47,7 @@ namespace _2Dshootertutorial {
             bgPosition2.Y += speed;
 
             //scrolling illusion, reset coordinates when needed
-            if (bgPosition1.Y >= Defualt.Default._H) {
+            if (bgPosition1.Y >= texture.Height) {
                 bgPosition1.Y = 0;
                 bgPosition2.Y = -1 * texture.Height;
             }
