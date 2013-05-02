@@ -37,7 +37,7 @@ namespace _2Dshootertutorial {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("700")]
+        [global::System.Configuration.DefaultSettingValueAttribute("725")]
         public int _H {
             get {
                 return ((int)(this["_H"]));
@@ -49,7 +49,7 @@ namespace _2Dshootertutorial {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        [global::System.Configuration.DefaultSettingValueAttribute("725")]
         public int _W {
             get {
                 return ((int)(this["_W"]));

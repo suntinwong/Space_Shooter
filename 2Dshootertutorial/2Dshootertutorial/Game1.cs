@@ -39,7 +39,7 @@ namespace _2Dshootertutorial {
 
             //Set some basic stuff for my game
             graphics.IsFullScreen = false; //set it to full screen no
-            graphics.PreferredBackBufferWidth = Defualt.Default._W + 175; //set the screen dimension width
+            graphics.PreferredBackBufferWidth = Defualt.Default._W; //set the screen dimension width
             graphics.PreferredBackBufferHeight = Defualt.Default._H; //set the screen dimension height
             this.Window.Title = "MySpaceShooter"; //set window title
         }

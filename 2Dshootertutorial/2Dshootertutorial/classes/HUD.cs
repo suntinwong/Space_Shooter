@@ -21,8 +21,8 @@ namespace _2Dshootertutorial{
         public HUD() {
             scoreText = "Score: ";
             healthText = "Health: ";
-            scorePos = new Vector2(Defualt.Default._W + 5, 100);
-            healthPos = new Vector2(Defualt.Default._W + 5, 150);
+            scorePos = new Vector2(Defualt.Default._W - 150, 50);
+            healthPos = new Vector2(Defualt.Default._W - 150, 85);
             textColor = Color.White;
             healthpercent = 100;
         }
@@ -50,12 +50,12 @@ namespace _2Dshootertutorial{
 
             //Draw first line of text: Game over
             string text = "Game Over";
-            Vector2 pos = new Vector2( ((Defualt.Default._W+200)/2)-50, Defualt.Default._H / 2);
+            Vector2 pos = new Vector2( ((Defualt.Default._W)/2)-25, Defualt.Default._H / 2);
             spritebatch.DrawString(spritefont, text, pos, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
 
             //Draw second line of text: Your final score
             string text2 = "Your Final Score: " + newscore;
-            Vector2 pos2 = new Vector2( ((Defualt.Default._W+200)/2)-100, (Defualt.Default._H / 2) +30);
+            Vector2 pos2 = new Vector2( ((Defualt.Default._W)/2)-75, (Defualt.Default._H / 2) +30);
             spritebatch.DrawString(spritefont, text2, pos2, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
         }
 

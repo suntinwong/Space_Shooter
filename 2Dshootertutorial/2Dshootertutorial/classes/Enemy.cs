@@ -58,7 +58,7 @@ namespace _2Dshootertutorial {
                 speedX = (float)(random.Next(-10, 10)) / 20f;
                 texture = Content.Load<Texture2D>("Artwork/enemyship0");
                 bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet0");
-                health = 50; speedY = 2.25f; bulletvelocity = 5.5f; firerate = 125; bulletdamage = 12; score = 5;
+                health = 50; speedY = 2.25f; bulletvelocity = 4.75f; firerate = 125; bulletdamage = 12; score = 5;
 
             }
 
@@ -66,7 +66,7 @@ namespace _2Dshootertutorial {
             else if (type == 1) {
                 texture = Content.Load<Texture2D>("Artwork/enemyship1");
                 bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet0");
-                health = 100; speedY = 1.25f; bulletvelocity = 5.5f; firerate = 100; bulletdamage = 12; score = 15;
+                health = 100; speedY = 1.25f; bulletvelocity = 4.75f; firerate = 100; bulletdamage = 12; score = 15;
             }
 
             //Type 2, large fighter type#2
@@ -81,7 +81,7 @@ namespace _2Dshootertutorial {
                 Random random = new Random();
                 texture = Content.Load<Texture2D>("Artwork/enemyship3");
                 bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet2");
-                health = 400; speedX = .5f; bulletvelocity = 7.5f; firerate = 200; bulletdamage = 50; score = 30;
+                health = 400; speedX = .35f; bulletvelocity = 7.5f; firerate = 200; bulletdamage = 50; score = 30;
                 position = new Vector2(-1 * texture.Width, random.Next(0, 200));
             }
         }
