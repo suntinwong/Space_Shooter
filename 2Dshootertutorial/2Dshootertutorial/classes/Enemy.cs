@@ -42,14 +42,21 @@ namespace _2Dshootertutorial {
             if (type == 0) {
                 texture = Content.Load<Texture2D>("Artwork/enemyship0");
                 bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet0");
-                health = 50; speed = 2.5f; bulletvelocity = 5f; firerate = 80; bulletdamage = 30; score = 5;
+                health = 50; speed = 2.5f; bulletvelocity = 5f; firerate = 75; bulletdamage = 15; score = 5;
             } 
             
             //Type 1, large fighter type
             else if (type == 1) {
                 texture = Content.Load<Texture2D>("Artwork/enemyship1");
                 bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet0");
-                health = 100; speed = 1.25f; bulletvelocity = 5f; firerate = 120; bulletdamage = 30; score = 10;
+                health = 100; speed = 1.25f; bulletvelocity = 5f; firerate = 110; bulletdamage = 15; score = 10;
+            }
+
+            //Type 2, large fighter type#2
+            else if (type == 2) {
+                texture = Content.Load<Texture2D>("Artwork/enemyship2");
+                bulletTexture = Content.Load<Texture2D>("Artwork/enemybullet1");
+                health = 100; speed = 1.25f; bulletvelocity = 4.25f; firerate = 75; bulletdamage = 25; score = 10;
             }
         }
 
@@ -66,7 +73,7 @@ namespace _2Dshootertutorial {
         }
 
         //update method
-        public void Update(GameTime gametime) {
+        public void Update(GameTime gametime,Vector2 playerpos) {
 
             //set bounding box for collision
             if (isVisible) boundingBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
@@ -77,30 +84,28 @@ namespace _2Dshootertutorial {
             if (position.Y >= Defualt.Default._H + 400) isVisible = false;
 
             //only shoot bullets if they are on the screen
-            if (position.Y > 0 && isVisible) shoot_bullets();
+            if (position.Y > 0 && isVisible) shoot_bullets(playerpos);
 
             //update all bullets
             update_bullets();
         }
 
         //shoot bullets helper function
-        private void shoot_bullets() {
+        private void shoot_bullets(Vector2 playerpos) {
 
              //shoot only if the bullet delay is set - Determine bullet texture, and bullet position
             if (bulletDelay >= firerate) {
+                bulletDelay = 0;
 
                 //Defualt, medium fighter type - one laser from center
                 if (shiptype == 0) {
                     Bullet b = new Bullet(bulletTexture,bulletvelocity);
                     b.position = new Vector2(position.X + texture.Width / 2 - b.texture.Width / 2, position.Y + texture.Height / 2 - b.texture.Height / 2);
-                    b.isVisible = true;
-                    bulletDelay = 0;
-                    if (bullets.Count() < 20) bullets.Add(b); //add bullet
+                    bullets.Add(b); //add bullet
                 }
 
                 //Large fighter type - three lasers fanned out
                 else if (shiptype == 1) {
-                    bulletDelay = 0;
                     Bullet b1 = new Bullet(bulletTexture,bulletvelocity);
                     b1.position = new Vector2(position.X + texture.Width / 2 - b1.texture.Width / 2, position.Y + texture.Height / 2 - b1.texture.Height / 2);
                     Bullet b2 = new Bullet(bulletTexture, bulletvelocity);
@@ -112,7 +117,16 @@ namespace _2Dshootertutorial {
                     bullets.Add(b1); //add bullet
                     bullets.Add(b2);
                     bullets.Add(b3);
-                }      
+                }
+      
+                //Large fighter type#2 - laser in general direction of player
+                else if (shiptype == 2) {
+                    Bullet b = new Bullet(bulletTexture, bulletvelocity);
+                    b.position = new Vector2(position.X + texture.Width / 2 - b.texture.Width / 2, position.Y + texture.Height / 2 - b.texture.Height / 2);
+                    b.speedX = (float)(Math.Atan2((playerpos.X - b.position.X),(playerpos.Y - b.position.Y ))); 
+
+                    bullets.Add(b); //add bullet
+                }
             }
         }
 

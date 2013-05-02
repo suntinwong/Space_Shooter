@@ -217,7 +217,7 @@ namespace _2Dshootertutorial {
             //Remove or update all enemies
             for (int i = 0; i < enemies.Count(); i++) {
                 if (enemies[i].position.Y >= Defualt.Default._H + 400 ) enemies.RemoveAt(i); //Remove astroids if not visible
-                else enemies[i].Update(gameTime); //update all asteroids
+                else enemies[i].Update(gameTime,p.position); //update all asteroids
             }
 
         }
@@ -242,9 +242,10 @@ namespace _2Dshootertutorial {
 
         //get a random shiptype number
         private int RandomShipType() {
-            int shiptype = 0;
+            int shiptype = 2;
             int rand = random.Next(0, 100);
-            if (rand > 80) shiptype = 1;
+            if (rand > 85) shiptype = 1;
+            else if (rand > 70) shiptype = 2;
             return shiptype;
         }
     }

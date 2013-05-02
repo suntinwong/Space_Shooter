@@ -36,7 +36,7 @@ namespace _2Dshootertutorial {
             speed = 5;              //Move speed
             laserDamage = 25;       //per laser hit damage
             bulletspeed = 15f;      //speed of the laser
-            firerate = 7.5f;          //fire rate of lasers
+            firerate = 8.5f;          //fire rate of lasers
 
             //set other stuff
             texture = null;
