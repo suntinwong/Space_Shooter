@@ -77,7 +77,7 @@ namespace _2Dshootertutorial {
 
             //When in the splash screen
             if (gamestate == 0) {
-                if (gameTime.TotalGameTime.TotalSeconds > 5) {
+                if (gameTime.TotalGameTime.TotalSeconds > 4) {
                     MediaPlayer.Play(sm.bgm1); //play background music
                     gamestate = 1;
                 }
@@ -92,6 +92,8 @@ namespace _2Dshootertutorial {
                 UpdateEnemies(gameTime);                        //update enemies
                 UpdateCollisions(gameTime);                     //update all collisions
                 hud.Update(p.score, p.health);                  //update the hud
+
+                if (gameTime.TotalGameTime.TotalSeconds % 210 == 209) { MediaPlayer.Stop(); MediaPlayer.Play(sm.bgm1); }
             }
 
             //Game wait between game state and gameover state
@@ -102,6 +104,8 @@ namespace _2Dshootertutorial {
                 if (gameTime.TotalGameTime.Seconds % 9 == 0)
                     New_Game();
             }
+
+           
 
             base.Update(gameTime);
         }
@@ -261,9 +265,9 @@ namespace _2Dshootertutorial {
         //get a random shiptype number
         private int RandomShipType() {
             int shiptype = 4;
-            int rand = random.Next(0, 100);
+            int rand = random.Next(0, 101);
             if (rand > 99) shiptype = 5;
-            if (rand > 98) shiptype = 3;
+            else if (rand > 98) shiptype = 3;
             else if (rand > 89) shiptype = 2;
             else if (rand > 81) shiptype = 1;
             else if (rand > 50) shiptype = 0;
@@ -290,6 +294,9 @@ namespace _2Dshootertutorial {
             //Reset game states
             gamestate = 1;
             gameoverflag = false;
+
+            //Play song
+            MediaPlayer.Play(sm.bgm1);
         }
     
     }
