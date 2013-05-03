@@ -66,6 +66,7 @@ namespace _2Dshootertutorial {
 
             //update boundingBox
             boundingBox = new Rectangle((int)position.X, (int)position.Y, texture.Width-5, texture.Height-8);
+            if (!isVisible) boundingBox = new Rectangle(0, 0, 0, 0);
 
             bool moveLeft, moveRight, moveUp, moveDown,firebullets;
 
@@ -93,7 +94,7 @@ namespace _2Dshootertutorial {
             if (moveLeft) position.X -= speed;
             if (moveDown) position.Y += speed;
             if (moveRight) position.X += speed;
-            if (firebullets) shoot_bullet();
+            if (firebullets && isVisible) shoot_bullet();
 
             //keep player in playing screen if applicable
             if (position.X <= 0) position.X = 0;

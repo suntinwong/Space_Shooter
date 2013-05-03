@@ -86,7 +86,7 @@ namespace _2Dshootertutorial {
             //When in playing game state
             if (gamestate == 1) {
                 sf.Update(gameTime);                            //update starfield
-                if(p.isVisible) p.Update(gameTime);             //update player
+                p.Update(gameTime);                             //update player
                 UpdateAsteroids(gameTime);                      //update asteroids
                 UpdateExplosions(gameTime);                     //update explosions
                 UpdateEnemies(gameTime);                        //update enemies
