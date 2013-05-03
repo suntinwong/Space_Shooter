@@ -201,14 +201,14 @@ namespace _2Dshootertutorial {
                         enemies[i].bullets[j].isVisible = false;
                         p.health -= (int)enemies[i].bulletdamage;
                         explosions.Add(new Explosion(Content, enemies[i].bullets[j].position, 20f, .33f));
-                        sm.explodeSound.Play();
+                        sm.playerHit.Play();
                     }
                 }
                 if (p.boundingBox.Intersects(enemies[i].boundingBox)) {  //check actual ship
                     if (p.health + 200 > enemies[i].health) { 
                         enemies[i].isVisible = false;
                         explosions.Add(new Explosion(Content, enemies[i].position, 20f, 1f));
-                        sm.explodeSound.Play();
+                        sm.playerHit.Play();
                     } 
                     p.health -= enemies[i].health/2;
                 }
@@ -220,7 +220,7 @@ namespace _2Dshootertutorial {
                     p.health -= asteroids[i].damage;
                     asteroids[i].isVisible = false;
                     explosions.Add(new Explosion(Content, asteroids[i].position, 20f, 1f));
-                    sm.explodeSound.Play();
+                    sm.playerHit.Play();
                 }
             }
 

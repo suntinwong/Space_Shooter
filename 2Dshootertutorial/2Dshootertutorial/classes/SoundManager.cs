@@ -13,12 +13,14 @@ namespace _2Dshootertutorial {
     public class SoundManager {
         public SoundEffect playerShootSound;
         public SoundEffect explodeSound;
+        public SoundEffect playerHit;
         public Song bgm1;
 
         //Constructor
         public SoundManager() {
             playerShootSound = null;
             explodeSound = null;
+            playerHit = null;
             bgm1 = null;
         }
 
@@ -26,6 +28,7 @@ namespace _2Dshootertutorial {
         public void LoadContent(ContentManager content) {
             playerShootSound = content.Load<SoundEffect>("Sounds/playershoot");
             explodeSound = content.Load<SoundEffect>("Sounds/explode");
+            playerHit = content.Load<SoundEffect>("Sounds/playerhit");
             bgm1 = content.Load<Song>("Sounds/bgm1");
         }
 
