@@ -25,7 +25,7 @@ namespace _2Dshootertutorial {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool UsingKinect {
             get {
                 return ((bool)(this["UsingKinect"]));
@@ -73,7 +73,7 @@ namespace _2Dshootertutorial {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int EnemyMax {
             get {
                 return ((int)(this["EnemyMax"]));

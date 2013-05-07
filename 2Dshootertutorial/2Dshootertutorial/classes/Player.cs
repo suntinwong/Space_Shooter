@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Kinect;
+using KinectTracking;
 
 namespace _2Dshootertutorial {
 
@@ -27,6 +29,8 @@ namespace _2Dshootertutorial {
         //other
         public int health,score,laserDamage;
         SoundManager sm;
+        private Kinect kinect;
+        double spineX;
 
         //Defualt Constructor
         public Player(){
@@ -46,6 +50,7 @@ namespace _2Dshootertutorial {
             bulletDelay = firerate;
             score = 0;
             sm = new SoundManager();
+            kinect = new Kinect();
         }
 
         //load content
@@ -53,6 +58,12 @@ namespace _2Dshootertutorial {
             texture = Content.Load<Texture2D>("Artwork/player");
             bulletTexture = Content.Load<Texture2D>("Artwork/playerbullet");
             sm.LoadContent(Content);
+            kinect = new Kinect();
+            kinect.initialize();
+            //kinect.start();
+            spineX = kinect.player.Joints[JointType.Spine].Position.X;
+
+
         }
 
         //draw funciton
@@ -87,6 +98,15 @@ namespace _2Dshootertutorial {
                 moveRight = false;
                 moveDown = false;
                 firebullets = false;
+
+                if (kinect.player.Joints[JointType.Spine].Position.X > (spineX + 10)) {
+                    moveRight = true;
+                }
+                else if (kinect.player.Joints[JointType.Spine].Position.X < (spineX + 10)) {
+                    moveLeft = true;
+                }
+
+                
             }
 
             //Move ship if applicable

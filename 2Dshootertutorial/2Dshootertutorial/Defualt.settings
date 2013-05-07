@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="UsingKinect" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="_H" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">725</Value>
@@ -15,7 +15,7 @@
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="EnemyMax" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">4</Value>
+      <Value Profile="(Default)">5</Value>
     </Setting>
   </Settings>
 </SettingsFile>
