@@ -81,8 +81,6 @@ namespace KinectTracking
             kinectSensor.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(kinectSkeletonFrameReadyCallback);
             kinectSensor.Start();
             kinectSensor.ElevationAngle = elevationAngle;
-
-           
         }
 
         // Process skeleton data

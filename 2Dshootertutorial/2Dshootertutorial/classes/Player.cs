@@ -30,7 +30,6 @@ namespace _2Dshootertutorial {
         public int health,score,laserDamage;
         SoundManager sm;
         private Kinect kinect;
-        double spineX;
 
         //Defualt Constructor
         public Player(){
@@ -51,6 +50,7 @@ namespace _2Dshootertutorial {
             score = 0;
             sm = new SoundManager();
             kinect = new Kinect();
+            
         }
 
         //load content
@@ -58,11 +58,11 @@ namespace _2Dshootertutorial {
             texture = Content.Load<Texture2D>("Artwork/player");
             bulletTexture = Content.Load<Texture2D>("Artwork/playerbullet");
             sm.LoadContent(Content);
-            kinect = new Kinect();
-            kinect.initialize();
-            //kinect.start();
-            spineX = kinect.player.Joints[JointType.Spine].Position.X;
 
+            //if (Defualt.Default.UsingKinect) {
+                kinect = new Kinect();
+                kinect.initialize();
+            //}
 
         }
 
@@ -99,14 +99,33 @@ namespace _2Dshootertutorial {
                 moveDown = false;
                 firebullets = false;
 
-                if (kinect.player.Joints[JointType.Spine].Position.X > (spineX + 10)) {
+                if (kinect.player == null) return;
+                
+                //moving the player right
+                if (kinect.player.Joints[JointType.HandRight].Position.X > (kinect.player.Joints[JointType.ShoulderRight].Position.X + .1) ) {
                     moveRight = true;
                 }
-                else if (kinect.player.Joints[JointType.Spine].Position.X < (spineX + 10)) {
+               
+                //movign the player left
+                else if (kinect.player.Joints[JointType.HandRight].Position.X < (kinect.player.Joints[JointType.ShoulderRight].Position.X - .1)) {
                     moveLeft = true;
                 }
 
-                
+                //moving the player UP
+                else if (kinect.player.Joints[JointType.HandRight].Position.Y > (kinect.player.Joints[JointType.ShoulderRight].Position.Y +.125)) {
+                    moveUp = true;
+                }
+
+                //movign the player Down
+                else if (kinect.player.Joints[JointType.HandRight].Position.Y < (kinect.player.Joints[JointType.ShoulderRight].Position.Y - .125)) {
+                    moveDown = true;
+                }
+
+               
+
+
+
+                firebullets = true;
             }
 
             //Move ship if applicable

@@ -30,7 +30,7 @@ namespace _2Dshootertutorial {
         SoundManager sm = new SoundManager(); //sound manager 
        
         //Game varibles
-        int gamestate = 0;
+        int gamestate = 1;
         bool gameoverflag = false;
 
         public Game1() {
@@ -78,7 +78,7 @@ namespace _2Dshootertutorial {
             //When in the splash screen
             if (gamestate == 0) {
                 if (gameTime.TotalGameTime.TotalSeconds > 4) {
-                    MediaPlayer.Play(sm.bgm1); //play background music
+                    //MediaPlayer.Play(sm.bgm1); //play background music
                     gamestate = 1;
                 }
             }
@@ -93,7 +93,7 @@ namespace _2Dshootertutorial {
                 UpdateCollisions(gameTime);                     //update all collisions
                 hud.Update(p.score, p.health);                  //update the hud
 
-                if (gameTime.TotalGameTime.TotalSeconds % 210 == 209) { MediaPlayer.Stop(); MediaPlayer.Play(sm.bgm1); }
+                //if (gameTime.TotalGameTime.TotalSeconds % 210 == 209) { MediaPlayer.Stop(); MediaPlayer.Play(sm.bgm1); }
             }
 
             //Game wait between game state and gameover state
@@ -104,8 +104,6 @@ namespace _2Dshootertutorial {
                 if (gameTime.TotalGameTime.Seconds % 9 == 0)
                     New_Game();
             }
-
-           
 
             base.Update(gameTime);
         }
@@ -296,7 +294,7 @@ namespace _2Dshootertutorial {
             gameoverflag = false;
 
             //Play song
-            MediaPlayer.Play(sm.bgm1);
+            //MediaPlayer.Play(sm.bgm1);
         }
     
     }
